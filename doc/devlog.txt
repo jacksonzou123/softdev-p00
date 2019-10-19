@@ -1,3 +1,6 @@
+emilyZ -- 2019-10-19 18:36
+Update README.md file with project name, team name, and roster.
+
 emilyZ -- 2019-10-19 18:25
 Added initial version of design document with components, tasks, site map, and database layout.
 
