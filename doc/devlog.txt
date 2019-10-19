@@ -1,2 +1,5 @@
+emilyZ -- 2019-10-19 18:25
+Added initial version of design document with components, tasks, site map, and database layout.
+
 jackieL -- 2019-10-18 08:24
 Team Bits, Please established with members Jackie, Emily, Elizabeth and Yaru. Created collaborative repo and added doc directory with devlog.
