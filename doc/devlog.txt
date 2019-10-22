@@ -1,3 +1,8 @@
+Team Bits, Please: Elizabeth Doss(DB), Jackie Lin(Backend), Yaru Luo(Frontend), Emily Zhang(PM)
+SoftDev1 pd 1
+P00 -- Da Art of Storytellin' (Scenario 2)
+2019-10-28
+
 jackieL -- 2019-10-18 08:24
 Team Bits, Please established with members Jackie, Emily, Elizabeth and Yaru. Created collaborative repo and added doc directory with devlog.
 
@@ -18,7 +23,7 @@ All joins match data from one table to match with rows in another, usually match
 on IDs. They return a proper subset of every possible combination of rows between the two
 tables. Inner join returns all the combinations where the clauses match exactly (most
 exclusive join). Left join is slightly more inclusive because all rows from the left
-tableare automatically returned, even if they have no corresponding row in the second
+table are automatically returned, even if they have no corresponding row in the second
 table based on the ON condition. Cross-join is the subset of all possible combinations
 between the rows of the two tables. If one table has M rows and the second has N rows,
 cross-join returns M x N rows. Inner join will be helpful for our website when we either
