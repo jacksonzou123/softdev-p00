@@ -50,3 +50,6 @@ Added database builder and created initial tables
 
 jackieL -- 2019-10-22 10:01
 Added all the functions for routes in app.py and updated design doc to reflect changes
+
+jackieL -- 2019-10-22 10:15
+Wrote out two really basic templates to test out routing 

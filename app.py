@@ -12,13 +12,13 @@ app.secret_key = os.urandom(32)
 
 @app.route("/")
 def root():
-    if ("user" in session):
+    if ("user" in session): #if signed in, go to profile
         return redirect(url_for('profile'))
-    return "Hello World" #render_template("login")
+    return redirect(url_for('sign')) #else go to sign-in options
 
 @app.route("/sign")
 def sign():
-    return "Sign in options"
+    return render_template('sign.html')
 
 @app.route("/select")
 def select():
@@ -39,6 +39,8 @@ def login():
 @app.route("/auth")
 def auth():
     return "Process login form"
+
+## USER MAY NOT PROCEED PAST HERE WITHOUT BEING LOGGED IN ##
 
 @app.route("/user")
 def profile():
