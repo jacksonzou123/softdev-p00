@@ -20,13 +20,9 @@ def root():
 def sign():
     return render_template('sign.html')
 
-@app.route("/select")
-def select():
-    return "process sign in form"
-
 @app.route("/register")
 def register():
-    return "Register new user"
+    return render_template('register.html')
 
 @app.route("/adduser")
 def adduser():
@@ -34,13 +30,17 @@ def adduser():
 
 @app.route("/login")
 def login():
-    return "login"
+    return render_template('login.html')
 
 @app.route("/auth")
 def auth():
     return "Process login form"
 
 ## USER MAY NOT PROCEED PAST HERE WITHOUT BEING LOGGED IN ##
+
+def isLoggedIn():
+    if ("user" not in session):
+        return redire
 
 @app.route("/user")
 def profile():
