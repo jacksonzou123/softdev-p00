@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-
 <html>
   <head>
-    <title> {{title}} </title>
+    {% block head %}
+    <title>{{title}}</title>
+    {% endblock %}
   </head>
   <body>
     <center>
@@ -10,9 +11,8 @@
       <p>Roster: Elizabeth Doss, Jackie Lin, Yaru Luo, Emily Zhang</p>
       <p>#P00: Da Art of Storytellin'</p>
       {% block content %}
-      {% endblock content %}
+      {% endblock %}
     </center>
   </body>
-
 
 </html>

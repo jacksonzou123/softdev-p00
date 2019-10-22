@@ -1,0 +1,16 @@
+{ % extends "base_sign.html" % }
+
+{% block content %}
+  <center>
+    <a href="/adduser">Sign Up</a>
+    <h1>Sign up: </h1>
+    <form action='/login'>
+        Username:<br>
+        <input type="text" name="username"><br>
+        Password:<br>
+        <input type="password" name="password">
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+  </center>
+{% endblock %}
