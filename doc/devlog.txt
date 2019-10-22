@@ -47,3 +47,6 @@ Updated design doc to fix small connector error in site map
 
 elizabethD -- 2019-10-22 08:42
 Added database builder and created initial tables
+
+jackieL -- 2019-10-22 10:01
+Added all the functions for routes in app.py and updated design doc to reflect changes
