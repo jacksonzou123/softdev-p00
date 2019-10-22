@@ -1,3 +1,6 @@
+jackieL -- 2019-10-21 20:22
+Updated sitemap using dashed boxes to represent form action routes, changed database layout into three tables, and clarified search bar component 
+
 emilyZ -- 2019-10-21 19:19
 Create directories for organization.
 
