@@ -1,17 +1,38 @@
-jackieL -- 2019-10-21 20:46
-All joins match data from one table to match with rows in another, usually matching based on IDs. They return a proper subset of every possible combination of rows between the two tables. Inner join returns all the combinations where the clauses match exactly (most exclusive join). Left join is slightly more inclusive because all rows from the left table are automatically returned, even if they have no corresponding row in the second table based on the ON condition. Cross-join is the subset of all possible combinations between the rows of the two tables. If one table has M rows and the second has N rows, cross-join returns M x N rows. Inner join will be helpful for our website when we either want to match a blog entry or a blog to a blog or a user, respectively, when we are retrieving information from the database to display on the "Search" page. Left join is more useful for keeping track of the blogs or blog entries a user has, since a user may not necessarily have any blogs and a blog may not necessarily have any entries. Cross join is useful for returning all possible combinations, which might be useful if users are trying to put the same content on every blog. Since cross join returns every possible combination, it would easily copy over the same content. After reading and discussing these join methods, we have made a slight edit to the design doc renaming one of the columns in our database so that we can better implement the USING condition.
-
-jackieL -- 2019-10-21 20:22
-Updated sitemap using dashed boxes to represent form action routes, changed database layout into three tables, and clarified search bar component
-
-emilyZ -- 2019-10-21 19:19
-Create directories for organization.
-
-emilyZ -- 2019-10-19 18:36
-Update README.md file with project name, team name, and roster.
+jackieL -- 2019-10-18 08:24
+Team Bits, Please established with members Jackie, Emily, Elizabeth and Yaru. Created collaborative repo and added doc directory with devlog.
 
 emilyZ -- 2019-10-19 18:25
 Added initial version of design document with components, tasks, site map, and database layout.
 
-jackieL -- 2019-10-18 08:24
-Team Bits, Please established with members Jackie, Emily, Elizabeth and Yaru. Created collaborative repo and added doc directory with devlog.
+emilyZ -- 2019-10-19 18:36
+Update README.md file with project name, team name, and roster.
+
+emilyZ -- 2019-10-21 19:19
+Create directories for organization.
+
+jackieL -- 2019-10-21 20:22
+Updated sitemap using dashed boxes to represent form action routes, changed database layout into three tables, and clarified search bar component
+
+jackieL -- 2019-10-21 20:46
+All joins match data from one table to match with rows in another, usually matching based 
+on IDs. They return a proper subset of every possible combination of rows between the two 
+tables. Inner join returns all the combinations where the clauses match exactly (most 
+exclusive join). Left join is slightly more inclusive because all rows from the left 
+tableare automatically returned, even if they have no corresponding row in the second 
+table based on the ON condition. Cross-join is the subset of all possible combinations 
+between the rows of the two tables. If one table has M rows and the second has N rows, 
+cross-join returns M x N rows. Inner join will be helpful for our website when we either 
+want to match a blog entry or a blog to a blog or a user, respectively, when we are 
+retrieving information from the database to display on the "Search" page. Left join is 
+more useful for keeping track of the blogs or blog entries a user has, since a user may 
+not necessarily have any blogs and a blog may not necessarily have any entries. Cross join  
+s useful for returning all possible combinations, which might be useful if users are 
+trying to put the same content on every blog. Since cross join returns every possible 
+combination, it would easily copy over the same content. After reading and discussing 
+these join methods, we have made a slight edit to the design doc renaming one of the 
+columns in our database so that we can better implement the USING condition.
+
+
+yaruL -- 2019-10-21 21:03
+1. if we figure out an error, communicate it. dont be a dick by letting someone else turn all snowflakes into urine.
+2. incrementally develop and keep hoping the last thing we wrote is good enough to survive for a few hours so we can eat dinner and catch a nap.
