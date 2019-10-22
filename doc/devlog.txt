@@ -39,3 +39,6 @@ Response to Reading
 
 jackieL -- 2019-10-21 21:10
 Updated design doc to fix small connector error in site map
+
+elizabethD -- 2019-10-22 08:42
+Added database builder and created initial tables
