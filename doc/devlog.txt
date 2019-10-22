@@ -56,3 +56,6 @@ Wrote out two really basic templates to test out routing
 
 jackieL -- 2019-10-22 19:27
 Added in function body for some of the routes after HTML templates were added 
+
+yaruL -- 2019-10-22 19:37
+Added login and register html files, both have button that link to each other and dummy forms
