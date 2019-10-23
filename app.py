@@ -16,9 +16,9 @@ def root():
         return redirect(url_for('profile'))
     return redirect(url_for('sign')) #else go to sign-in options
 
-@app.route("/sign")
+@app.route("/welcome")
 def sign():
-    return render_template('sign.html')
+    return render_template('welcome.html')
 
 @app.route("/register")
 def register():
