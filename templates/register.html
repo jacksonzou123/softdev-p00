@@ -1,16 +1,14 @@
-{ % extends "base_sign.html" % }
+{% extends "base_sign.html" %}
 
 {% block content %}
-  <center>
-    <a href="/login">Sign In</a>
-    <h1>Sign up: </h1>
-    <form action='/adduser'>
-        Username:<br>
-        <input type="text" name="username"><br>
-        Password:<br>
-        <input type="password" name="password">
-        <br>
-        <input type="submit" value="Submit">
-    </form>
-  </center>
+  <h1>Sign up: </h1>
+  <form action='/adduser'>
+      Username:<br>
+      <input type="text" name="username"><br>
+      Password:<br>
+      <input type="password" name="password">
+      <br>
+      <input type="submit" value="Submit">
+  </form><br>
+  <a href="/login">Sign In</a>
 {% endblock %}
