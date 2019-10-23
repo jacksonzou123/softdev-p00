@@ -4,6 +4,7 @@
 #2019-10-28
 
 from flask import Flask, render_template, session, url_for, request, redirect, flash
+from utl import tester
 import os
 
 app = Flask(__name__)
@@ -24,9 +25,12 @@ def sign():
 def register():
     return render_template('register.html')
 
-@app.route("/adduser")
+@app.route("/adduser", methods=['POST'])
 def adduser():
-    return "Process register form"
+    print(request.method)
+    username = request.form['username']
+    password = request.form['password']
+    return redirect(url_for('profile'))
 
 @app.route("/login")
 def login():

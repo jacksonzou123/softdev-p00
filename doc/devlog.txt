@@ -68,3 +68,6 @@ Rename sign to welcome as according to sitemap
 
 jackieL -- 2019-10-23 08:11
 Fixed spacing error in Jinja code and moved the heading and links on the login and register pages
+
+jackieL -- 2019-10-23 10:19
+Modified Flask code to handle user input for register forms

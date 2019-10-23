@@ -1,5 +1,5 @@
 #Team Bits Please
-#SoftDev 1 pd1 
+#SoftDev 1 pd1
 #P00 -- Da Art of Storytellin'
 #2019-10-28
 
@@ -35,14 +35,14 @@ def verifyUserHelper(username, password, data):
     #print(myEntry)
     if (myEntry in data):
         return True
-    return False    
+    return False
 
 #verifyUser
 def verifyUser(username, password):
     q = "SELECT username,password FROM user_tbl;"
     data = c.execute(q).fetchall()
     return verifyUserHelper(username,password,data)
-    
+
 #addUser tests
 addUser("Elizabeth","wow")
 addUser("Emily","this")
