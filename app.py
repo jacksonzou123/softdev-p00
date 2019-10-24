@@ -62,54 +62,80 @@ def auth():
 ## USER MAY NOT PROCEED PAST HERE WITHOUT BEING LOGGED IN ##
 
 #checks if user is logged in
-def login_required():
-    if ('userid' not in session):
-        flash('You must log in to access this page!', 'red')
-        return redirect(url_for('login'))
 
 @app.route("/user")
 def profile():
-    #QUERY STRING
-    return "user profile"
+    if ("userid" not in session):
+      flash('You must log in to access this page!', 'red')
+      return redirect(url_for('login'))
+    print(request.args['id'])
+    return render_template('profile.html')
 
 @app.route("/about")
 def about():
-    return "About page"
+    if ("userid" not in session):
+      flash('You must log in to access this page!', 'red')
+      return redirect(url_for('login'))
+    return render_template('about.html')
 
 @app.route("/search")
 def search():
+    if ("userid" not in session):
+      flash('You must log in to access this page!', 'red')
+      return redirect(url_for('login'))
     #QUERY STRING
     #IF NO QUERY STRING RET ONLY FORM
     return "search form"
 
 @app.route("/query")
 def query():
+    if ("userid" not in session):
+      flash('You must log in to access this page!', 'red')
+      return redirect(url_for('login'))
     return "process search form"
 
 @app.route("/createblog")
 def createblog():
+    if ("userid" not in session):
+      flash('You must log in to access this page!', 'red')
+      return redirect(url_for('login'))
     return "create a new blog"
 
 @app.route("/updateblog")
 def updateblog():
+    if ("userid" not in session):
+      flash('You must log in to access this page!', 'red')
+      return redirect(url_for('login'))
     return "process create blog form"
 
 @app.route("/blog")
 def blog():
+    if ("userid" not in session):
+      flash('You must log in to access this page!', 'red')
+      return redirect(url_for('login'))
     #QUERY STRING
     return "View blog"
 
 @app.route("/entry")
 def entry():
+    if ("userid" not in session):
+      flash('You must log in to access this page!', 'red')
+      return redirect(url_for('login'))
     #QUERY STRING
     return "View blog entry"
 
 @app.route("/editentry")
 def editentry():
+    if ("userid" not in session):
+      flash('You must log in to access this page!', 'red')
+      return redirect(url_for('login'))
     return "Create or edit blog entry"
 
 @app.route("/updateentry")
 def updateentry():
+    if ("userid" not in session):
+      flash('You must log in to access this page!', 'red')
+      return redirect(url_for('login'))
     return "process edit entry form"
 
 @app.route("/logout")
