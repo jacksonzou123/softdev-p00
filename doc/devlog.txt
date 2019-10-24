@@ -71,3 +71,6 @@ Fixed spacing error in Jinja code and moved the heading and links on the login a
 
 jackieL -- 2019-10-23 10:19
 Modified Flask code to handle user input for register forms
+
+jackieL -- 2019-10-23 22:33
+Incorporated database functions written by Elizabeth into Flask code for registering user 

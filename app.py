@@ -4,7 +4,7 @@
 #2019-10-28
 
 from flask import Flask, render_template, session, url_for, request, redirect, flash
-from utl import tester
+from utl import tester, db_builder
 import os
 
 app = Flask(__name__)
@@ -27,10 +27,19 @@ def register():
 
 @app.route("/adduser", methods=['POST'])
 def adduser():
-    print(request.method)
     username = request.form['username']
     password = request.form['password']
-    return redirect(url_for('profile'))
+    #print(request.method)
+    #print(username)
+    #print(password)
+    id = tester.addUser(username, password)
+    if (id != -1):
+        session["userid"] = id
+        #print(session["userid"])
+        flash('You have logged in successfully', 'green')
+        return redirect(url_for('profile', id=id))
+    flash('Username already taken', 'red')
+    return redirect(url_for('register'))
 
 @app.route("/login")
 def login():
@@ -41,10 +50,6 @@ def auth():
     return "Process login form"
 
 ## USER MAY NOT PROCEED PAST HERE WITHOUT BEING LOGGED IN ##
-
-def isLoggedIn():
-    if ("user" not in session):
-        return redire
 
 @app.route("/user")
 def profile():
@@ -96,5 +101,6 @@ def logout():
     return "Logout"
 
 if __name__ == "__main__":
+    db_builder.build_db()
     app.debug = True
     app.run()
