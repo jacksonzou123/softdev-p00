@@ -1,5 +1,11 @@
-{% extends "base_sign.html" %}
+{% extends "base_profile.html" %}
 
 {% block content %}
+<h1>
+  Hello, {{ username }}
+</h1>
+
+
+<button type="button" onclick="/createblog">Create blog</button>
 
 {% endblock %}
