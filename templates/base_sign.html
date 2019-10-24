@@ -7,6 +7,14 @@
   </head>
   <body>
     <center>
+      {% block navbar %}
+      <div class="topnav">
+	<a href="/logout">Log out</a>
+	<a href="/user">Profile</a>
+	<a href="/search">Search</a>
+	<a href="/about">About</a>
+      </div>
+      {% endblock %}
       {% block content %}
       {% endblock %}
       <br><br>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% block head %}
+    <title>{{title}}</title>
+    {% endblock %}
+  </head>
+  <body>
+    <center>
+      {% block content %}
+      {% endblock %}
+      <br><br>
+      {% set msgs = get_flashed_messages(with_categories=true) %}
+      {% for category, msg in msgs %}
+        <p style="color: {{ category }};">
+          {{ msg }}
+        </p>
+      {% endfor %}
+    </center>
+  </body>
+
+</html>
