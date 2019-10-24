@@ -32,8 +32,9 @@ def adduser():
     #print(request.method)
     #print(username)
     #print(password)
-    id = tester.addUser(username, password)
-    if (id != -1):
+    added = tester.addUser(username, password)
+    if (added):
+        id = tester.retUser(username)
         session["userid"] = id
         #print(session["userid"])
         flash('You have logged in successfully', 'green')
@@ -45,9 +46,18 @@ def adduser():
 def login():
     return render_template('login.html')
 
-@app.route("/auth")
+@app.route("/auth", methods=['POST'])
 def auth():
-    return "Process login form"
+    username = request.form['username']
+    password = request.form['password']
+    verified = tester.verifyUser(username, password)
+    if (verified):
+        id = tester.retUser(username)
+        session["userid"] = id
+        flash('You have logged in successfully', 'green')
+        return redirect(url_for('profile', id=id))
+    flash('Error with logging in', 'red')
+    return redirect(url_for('login'))
 
 ## USER MAY NOT PROCEED PAST HERE WITHOUT BEING LOGGED IN ##
 

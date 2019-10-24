@@ -73,4 +73,7 @@ jackieL -- 2019-10-23 10:19
 Modified Flask code to handle user input for register forms
 
 jackieL -- 2019-10-23 22:33
-Incorporated database functions written by Elizabeth into Flask code for registering user 
+Incorporated database functions written by Elizabeth into Flask code for registering user
+
+jackieL -- 2019-10-23 22:58
+Wrote short new function to return userID from blog.db and used it in Flask code to verify and register users
