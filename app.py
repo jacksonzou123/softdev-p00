@@ -13,7 +13,7 @@ app.secret_key = os.urandom(32)
 
 @app.route("/")
 def root():
-    if ("user" in session): #if signed in, go to profile
+    if ("userid" in session): #if signed in, go to profile
         return redirect(url_for('profile'))
     return redirect(url_for('sign')) #else go to sign-in options
 
@@ -37,9 +37,9 @@ def adduser():
         id = tester.getUser(username)
         session["userid"] = id
         #print(session["userid"])
-        flash('You have logged in successfully', 'green')
-        return redirect(url_for('profile', id=id))
-    flash('Username already taken', 'red')
+        flash('You have been registered successfully. Please log in.', 'green')
+        return redirect(url_for('login'))
+    flash('Username already taken.', 'red')
     return redirect(url_for('register'))
 
 @app.route("/login")
@@ -54,12 +54,18 @@ def auth():
     if (verified):
         id = tester.getUser(username)
         session["userid"] = id
-        flash('You have logged in successfully', 'green')
+        flash('You have logged in successfully.', 'green')
         return redirect(url_for('profile', id=id))
     flash('Error with logging in', 'red')
     return redirect(url_for('login'))
 
 ## USER MAY NOT PROCEED PAST HERE WITHOUT BEING LOGGED IN ##
+
+#checks if user is logged in
+def login_required():
+    if ('userid' not in session):
+        flash('You must log in to access this page!', 'red')
+        return redirect(url_for('login'))
 
 @app.route("/user")
 def profile():
@@ -108,7 +114,9 @@ def updateentry():
 
 @app.route("/logout")
 def logout():
-    return "Logout"
+    session.clear()
+    flash('You have been successfully logged out.', 'green')
+    return redirect(url_for('root'))
 
 if __name__ == "__main__":
     db_builder.build_db()
