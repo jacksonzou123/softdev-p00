@@ -34,7 +34,7 @@ def adduser():
     #print(password)
     added = tester.addUser(username, password)
     if (added):
-        id = tester.retUser(username)
+        id = tester.getUser(username)
         session["userid"] = id
         #print(session["userid"])
         flash('You have logged in successfully', 'green')
@@ -52,7 +52,7 @@ def auth():
     password = request.form['password']
     verified = tester.verifyUser(username, password)
     if (verified):
-        id = tester.retUser(username)
+        id = tester.getUser(username)
         session["userid"] = id
         flash('You have logged in successfully', 'green')
         return redirect(url_for('profile', id=id))
