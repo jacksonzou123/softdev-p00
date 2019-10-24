@@ -77,3 +77,6 @@ Incorporated database functions written by Elizabeth into Flask code for registe
 
 jackieL -- 2019-10-23 22:58
 Wrote short new function to return userID from blog.db and used it in Flask code to verify and register users
+
+jackieL -- 2019-10-24 08:02
+Pushed empty HTML templates for profile pages 
