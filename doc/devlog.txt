@@ -85,10 +85,13 @@ yaruL -- 2019-10-24 08:18
 Added NavBar
 
 elizabethD -- 2019-10-24 19:54
-Modified user methods so they are functional
+Fixed user methods
 
 emilyZ -- 2019-10-24 22:21
 Add in Task the Toid, detailing instructions for running the program and listed dependencies
 
 jackieL -- 2019-10-25 01:43
 Wrote error handling faulty URLs for user profile
+
+elizabethD -- 2019-10-25 05:48
+Added all blog functions and some get blog methods, getBlogID nonfunctional
