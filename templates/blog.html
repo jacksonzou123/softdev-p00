@@ -2,11 +2,12 @@
 
 {% block content %}
 <h1>
-  Blog by: {{ username }}
+  Blog by:
+    <a href="{{ userlink }}">{{ username }}</a>
 </h1>
-<h1>
-  Blog Titlle: {{ title }}
-</h1>
+<h3>
+  Blog Title: {{ title }}
+</h3>
 
 {% if isOwner %}
 <form>

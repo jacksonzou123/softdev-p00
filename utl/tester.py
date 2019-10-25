@@ -164,6 +164,11 @@ def getUserfromBlog(id):
     data = exec(q).fetchone()
     return data
 
+def getAllBlogs(user_id):
+    user_id = int(user_id)
+    q = "SELECT title, blog_id FROM blog_tbl where user_id= %d" % user_id
+    data = exec(q).fetchall()
+    return data
 #==========================blog get methods===========================
 
 ##addNewBlog
@@ -182,3 +187,5 @@ def getUserfromBlog(id):
 ##sqlite3.OperationalError: no such column: Doss
 #print(getBlogID("Elizabeth", "Doss"))
 #print(getBlogID("Yaru", "Lao"))
+
+#==========================entry functions===========================

@@ -14,10 +14,9 @@
 <br><br><br>
 {% endif %}
 
-
-
-<a href=''>Blog Title</a><br>
-<a href=''>Blog Title</a><br>
-<a href=''>Blog Title</a><br>
+Blogs: <br>
+{% for title, id in blogs %}
+  <a href="/blog?id={{ id }}"> {{ title }}</a><br>
+{% endfor %}
 
 {% endblock %}

@@ -79,7 +79,8 @@ def profile():
                 isOwner = False
                 if (id == session['userid']):
                     isOwner = True
-                return render_template('profile.html', username=username, isOwner=isOwner) #success!
+                blogs = tester.getAllBlogs(id)
+                return render_template('profile.html', username=username, isOwner=isOwner, blogs = blogs) #success!
             flash('No profile was found for the given url. You have been redirected back to your own profile.', 'red')
         else:
             flash('No profile was found for the given url. You have been redirected back to your own profile.', 'red')
@@ -141,7 +142,7 @@ def blog():
     if (request.args):
         if ('id' in request.args):
             id = request.args['id']
-            name = tester.getBlogTitle(id)
+            name = tester.getBlogTitle(id)[0]
             if (name):
                 title = name[0]
                 isOwner = False
@@ -149,7 +150,8 @@ def blog():
                 username = tester.getUserInfo(user_id)[0]
                 if (int(user_id) == int(session['userid'])):
                     isOwner = True
-                return render_template('blog.html', username=username, isOwner=isOwner)
+                userlink = "/user?id=%s" % user_id
+                return render_template('blog.html', username=username, isOwner=isOwner, title=name, userlink=userlink)
             flash('No blog was found for the given URL. You have been redirected back to your own profile.', 'red')
         else:
             flash('No blog was found for the given URL. You have been redirected back to your own profile.', 'red')
@@ -177,6 +179,11 @@ def updateentry():
     if ("userid" not in session):
       flash('You must log in to access this page!', 'red')
       return redirect(url_for('login'))
+    heading = request.form['header']
+    content = request.form['content']
+    if (heading == '' or content == ''):
+        flash('Fields cannot be empty', 'red')
+        return redirect(url_for('editentry'))
     return "process edit entry form"
 
 @app.route("/logout")
