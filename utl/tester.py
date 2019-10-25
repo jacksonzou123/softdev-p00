@@ -6,7 +6,7 @@
 import sqlite3
 import random
 import sys
-import db_builder
+from utl.db_builder import exec
 
 #for creating randomly generated id numbers
 limit = sys.maxsize
@@ -46,11 +46,14 @@ def verifyUser(username, password):
     data = exec(q).fetchall()
     return verifyUserHelper(username,password,data)
 
-def getUser(username):
-    q = "SELECT user_id, username FROM user_tbl where username = '%s';" % username
+def getUserID(username):
+    q = "SELECT user_id FROM user_tbl where username = '%s';" % username
     data = exec(q).fetchone()
-    if (data is None):
-        return -1
+    return data
+
+def getUserInfo(user_id):
+    q = "SELECT username FROM user_tbl where user_id = '%s';" % user_id
+    data = exec(q).fetchone()
     return data
 
 ###addUser tests
@@ -72,5 +75,3 @@ def getUser(username):
 ##print(getUser("Yaru"))
 ##print(getUser("Jackie"))
 ##print(getUser("wow"))
-
-

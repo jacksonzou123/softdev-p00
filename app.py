@@ -4,7 +4,7 @@
 #2019-10-28
 
 from flask import Flask, render_template, session, url_for, request, redirect, flash
-from utl import tester, db_builder
+from utl import db_builder, tester
 import os
 
 app = Flask(__name__)
@@ -52,7 +52,7 @@ def auth():
     password = request.form['password']
     verified = tester.verifyUser(username, password)
     if (verified):
-        id = tester.getUser(username)
+        id = tester.getUserID(username)
         session["userid"] = id
         flash('You have logged in successfully.', 'green')
         return redirect(url_for('profile', id=id))
@@ -68,8 +68,18 @@ def profile():
     if ("userid" not in session):
       flash('You must log in to access this page!', 'red')
       return redirect(url_for('login'))
-    print(request.args['id'])
-    return render_template('profile.html')
+    #print(request.args['id'])
+    if (request.args): #if url has query string
+        if ('id' in request.args): #if url has id
+            id = request.args['id']
+            name = tester.getUserInfo(id)
+            if (name): #if id is valid user id
+                username = name[0]
+                return render_template('profile.html', username=username) #success!
+            flash('No profile was found for the given url. You have been redirected back to your own profile.', 'red')
+        else:
+            flash('No profile was found for the given url. You have been redirected back to your own profile.', 'red')
+    return redirect(url_for('profile', id=session["userid"]))
 
 @app.route("/about")
 def about():
