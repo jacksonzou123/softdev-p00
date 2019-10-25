@@ -95,3 +95,6 @@ Wrote error handling faulty URLs for user profile
 
 elizabethD -- 2019-10-25 05:48
 Added all blog functions and some get blog methods, getBlogID nonfunctional
+
+emilyZ -- 2019-10-25 10:04
+Add content to About page and modify README.md

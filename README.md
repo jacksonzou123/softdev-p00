@@ -9,7 +9,7 @@ To run: In the softdev-p00 directory, run ```$python app.py```
 Dependencies:
     - Flask
         ```$pip install flask```
-    - Jinja2
+    - Jinja2 (usually included in Python library)
         ```$pip install Jinja2```
     - SQLite (usually included in Python library)
         ```$pip install pysqlite3```
