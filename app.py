@@ -109,7 +109,8 @@ def createblog():
     if ("userid" not in session):
       flash('You must log in to access this page!', 'red')
       return redirect(url_for('login'))
-    return "create a new blog"
+    username = tester.getUserInfo(session['userid'])[0]
+    return render_template('createblog.html', username=username)
 
 @app.route("/updateblog")
 def updateblog():
