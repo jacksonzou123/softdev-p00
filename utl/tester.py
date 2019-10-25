@@ -8,8 +8,6 @@ import random
 import sys
 import db_builder
 
-#db_builder.build_db()
-
 #for creating randomly generated id numbers
 limit = sys.maxsize
 
@@ -55,15 +53,24 @@ def getUser(username):
         return -1
     return data
 
-#addUser tests
-#addUser("Elizabeth","wow")
-#addUser("Emily","this")
-#addUser("Jackie","actually")
-#addUser("Yaru","works")
+###addUser tests
+##addUser("Elizabeth","wow")
+##addUser("Emily","this")
+##addUser("Jackie","actually")
+##addUser("Yaru","works")
+##
+###verifyUser tests
+##print(verifyUser("Elizabeth","wow"))    #True
+##print(verifyUser("Emily","this"))       #True
+##print(verifyUser("Elizabeth","wow"))    #True
+##print(verifyUser("Elizabeth","wo"))     #False
+##print(verifyUser("Elizbeth","wow"))     #False
+##
+###getUser tests
+##print(getUser("Elizabeth"))
+##print(getUser("Emily"))
+##print(getUser("Yaru"))
+##print(getUser("Jackie"))
+##print(getUser("wow"))
 
-#verifyUser tests: TTTFF
-#print(verifyUser("Elizabeth","wow"))
-#print(verifyUser("Emily","this"))
-#print(verifyUser("Elizabeth","wow"))
-#print(verifyUser("Elizabeth","wo"))
-#print(verifyUser("Elizbeth","wow"))
+
