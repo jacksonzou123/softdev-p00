@@ -6,6 +6,7 @@
 from flask import Flask, render_template, session, url_for, request, redirect, flash
 from utl import db_builder, tester
 import os
+from datetime import date
 
 app = Flask(__name__)
 #session secret key, code from Stack Overflow
@@ -34,9 +35,6 @@ def adduser():
     #print(password)
     added = tester.addUser(username, password)
     if (added):
-        id = tester.getUser(username)
-        session["userid"] = id
-        #print(session["userid"])
         flash('You have been registered successfully. Please log in.', 'green')
         return redirect(url_for('login'))
     flash('Username already taken.', 'red')
@@ -52,7 +50,7 @@ def auth():
     password = request.form['password']
     verified = tester.verifyUser(username, password)
     if (verified):
-        id = tester.getUserID(username)
+        id = tester.getUserIDStr(username)
         session["userid"] = id
         flash('You have logged in successfully.', 'green')
         return redirect(url_for('profile', id=id))
@@ -112,12 +110,15 @@ def createblog():
     username = tester.getUserInfo(session['userid'])[0]
     return render_template('createblog.html', username=username)
 
-@app.route("/updateblog")
+@app.route("/updateblog", methods=['POST'])
 def updateblog():
     if ("userid" not in session):
       flash('You must log in to access this page!', 'red')
       return redirect(url_for('login'))
-    return "process create blog form"
+    title = request.form['title']
+    #print(title)
+    id = tester.addBlog(session['userid'], title)
+    return redirect(url_for('blog', id=id))
 
 @app.route("/blog")
 def blog():

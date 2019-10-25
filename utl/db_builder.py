@@ -20,7 +20,7 @@ def build_db():
     command = "CREATE TABLE IF NOT EXISTS user_tbl (user_id INT, username TEXT, password TEXT)"
     exec(command)    # run SQL statement
 
-    command = "CREATE TABLE IF NOT EXISTS blog_tbl (blog_id INT, user_id INT, title TEXT, time_created TEXT, time_updated TEXT)"
+    command = "CREATE TABLE IF NOT EXISTS blog_tbl (blog_id INT, user_id INT, title TEXT)"
     exec(command)    # run SQL statement
 
     command = "CREATE TABLE IF NOT EXISTS entry_tbl (entry_id INT, blog_id INT, title TEXT, content TEXT, time_created TEXT, time_updated TEXT)"

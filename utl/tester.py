@@ -10,7 +10,6 @@ from utl.db_builder import exec
 
 #for creating randomly generated id numbers
 limit = sys.maxsize
-
 #==========================user functions===========================
 
 #helper function
@@ -82,56 +81,59 @@ def getUserPass(user_id):
 #==========================user tests===========================
 
 #addUser - doesn't matter if commented out because checks if user already exists
-addUser("Elizabeth","wow")
-addUser("Emily","this")
-addUser("Jackie","actually")
-addUser("Yaru","works")
+#addUser("Elizabeth","wow")
+#addUser("Emily","this")
+#addUser("Jackie","actually")
+#addUser("Yaru","works")
 
 
 #verifyUser
-print(verifyUser("Elizabeth","wow"))    #True
-print(verifyUser("Elizabeth","wo"))     #False
+#print(verifyUser("Elizabeth","wow"))    #True
+#print(verifyUser("Elizabeth","wo"))     #False
 
 
 #getUser
-print(getUserID("Elizabeth"))
-print(getUserIDStr("Emily"))
-print(getUserID("wow"))        #None
+#print(getUserID("Elizabeth"))
+#print(getUserIDStr("Emily"))
+#print(getUserID("wow"))        #None
 
 #==========================blog functions===========================
 
 #joins user_id for user_tbl and blog_tbl
-command="SELECT user_tbl.user_id FROM user_tbl LEFT JOIN blog_tbl ON user_tbl.user_id = blog_tbl.user_id"
-exec(command)
+#command="SELECT user_tbl.user_id FROM user_tbl LEFT JOIN blog_tbl ON user_tbl.user_id = blog_tbl.user_id"
+#exec(command)
 
 
 #helper function
-def addNewBlogHelper(user_id, title, time_created, data):
+def addBlogHelper(user_id, title, data):
     rand = random.randrange(limit)
     while (rand in data):
         rand = random.randrange(limit)
     #print(rand)
-    command = "INSERT INTO blog_tbl VALUES(" + str(rand) + "," + user_id + ",\"" + title + "\",\"" + time_created + "\",\"" + time_created + "\")"
     #print(command)
+    command = "INSERT INTO blog_tbl VALUES(%s, %s, '%s')" % (rand, user_id, title)
+    print(command)
     exec(command)
+    return rand;
 
 
 #addNewBlog
-def addNewBlog(username, title, time_created):
-    user_id = getUserIDStr(username) 
-    q = "SELECT title FROM blog_tbl where user_id = '%s';" % user_id
+def addBlog(user_id, title):
+    user_id = int(user_id)
+    q = "SELECT blog_id FROM blog_tbl WHERE user_id = %d;" % user_id
     data = exec(q).fetchall()
-    addNewBlogHelper(user_id, title, time_created, data)
+    return addBlogHelper(user_id, title, data)
 
+#addBlog(1, "Hey")
 
-def updateBlog(username, title, time_edited):
-    user_id = getUserIDStr(username) 
-    command = "UPDATE blog_tbl SET time_updated=\"" + time_edited + "\" WHERE title=\"" + title + "\" AND user_id=" + user_id + ";"
-    print(command)
-    exec(command)
+#def updateBlog(username, title, time_edited):
+#    user_id = getUserIDStr(username)
+#    command = "UPDATE blog_tbl SET time_updated=\"" + time_edited + "\" WHERE title=\"" + title + "\" AND user_id=" + user_id + ";"
+#    print(command)
+#    exec(command)
 
 #==========================blog get methods===========================
-    
+
 #getBlogID
 def getBlogID(username, title):
     user_id = getUserIDStr(username)
@@ -170,8 +172,3 @@ def getBlogTitle(blog_id):
 ##sqlite3.OperationalError: no such column: Doss
 #print(getBlogID("Elizabeth", "Doss"))
 #print(getBlogID("Yaru", "Lao"))
-
-
-
-
-
