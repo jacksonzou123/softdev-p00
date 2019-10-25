@@ -174,12 +174,12 @@ def editentry():
       return redirect(url_for('login'))
     return render_template('createentry.html')
 
-@app.route("/updateentry")
+@app.route("/updateentry", methods=['POST'])
 def updateentry():
     if ("userid" not in session):
       flash('You must log in to access this page!', 'red')
       return redirect(url_for('login'))
-    heading = request.form['header']
+    heading = request.form['title']
     content = request.form['content']
     if (heading == '' or content == ''):
         flash('Fields cannot be empty', 'red')

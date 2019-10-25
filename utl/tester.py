@@ -71,13 +71,6 @@ def getUserInfo(user_id):
     data = exec(q).fetchone()
     return data
 
-
-#getUserInfo
-def getUserPass(user_id):
-    q = "SELECT password FROM user_tbl where user_id = '%s';" % user_id
-    data = exec(q).fetchone()
-    return data
-
 #==========================user tests===========================
 
 #addUser - doesn't matter if commented out because checks if user already exists
@@ -128,17 +121,9 @@ def addBlog(user_id, title):
     data = exec(q).fetchall()
     return addBlogHelper(user_id, title, data)
 
-#addBlog(1, "Hey")
-
-#def updateBlog(username, title, time_edited):
-#    user_id = getUserIDStr(username)
-#    command = "UPDATE blog_tbl SET time_updated=\"" + time_edited + "\" WHERE title=\"" + title + "\" AND user_id=" + user_id + ";"
-#    print(command)
-#    exec(command)
-
 #==========================blog get methods===========================
 
-#getBlogID
+#getBlogID, unused
 def getBlogID(username, title):
     user_id = getUserIDStr(username)
     q = "SELECT blog_id FROM blog_tbl WHERE user_id =" + user_id + " AND title=" + title + ";"
@@ -146,7 +131,7 @@ def getBlogID(username, title):
     return data
 
 
-#getBlogIDStr for str instead of tuple output
+#getBlogIDStr for str instead of tuple output, unused 
 def getBlogIDStr(username, title):
     blog_id = getBlogID(username, title)
     return str(user_id[0])
