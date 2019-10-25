@@ -86,3 +86,6 @@ Added NavBar
 
 elizabethD -- 2019-10-24 19:54
 Modified user methods so they are functional
+
+emilyZ -- 2019-10-24 22:21
+Add in Task the Toid, detailing instructions for running the program and listed dependencies
