@@ -1,0 +1,23 @@
+{% extends "base_profile.html" %}
+
+{% block content %}
+<h1>
+  Hello, {{ username }}
+</h1>
+
+
+<h3>
+  <a href="/entry">Blog Post</a>
+</h3>
+<form>
+  <button type="submit" formaction="/editentry">Edit</button>
+</form>
+
+<br><br><br>
+
+<form>
+  <button type="submit" formaction="/createblog">Create Blog</button>
+</form>
+<br><br><br>
+
+{% endblock %}
