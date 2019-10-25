@@ -2,22 +2,24 @@
 
 {% block content %}
 <h1>
-  Hello, {{ username }}
+  Blog by: {{ username }}
+</h1>
+<h1>
+  Blog Titlle: {{ title }}
 </h1>
 
-
-<h3>
-  <a href="/entry">Blog Post</a>
-</h3>
+{% if isOwner %}
 <form>
-  <button type="submit" formaction="/editentry">Edit</button>
+  <button type="submit" formaction="/editentry">Create Entry</button>
 </form>
+{% endif %}
 
-<br><br><br>
+{% for entry in entries %}
+  <p>
+    {{ entry }}
+  </p>
+{% endfor %}
+<br>
 
-<form>
-  <button type="submit" formaction="/createblog">Create Blog</button>
-</form>
-<br><br><br>
 
 {% endblock %}

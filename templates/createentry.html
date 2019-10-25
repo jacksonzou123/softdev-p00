@@ -1,0 +1,15 @@
+{% extends "base_profile.html" %}
+
+{% block content %}
+<h1>
+  Hello, {{ username }}
+</h1>
+
+<form action="/updateentry" method="POST">
+  Header: <input type="text" name="title"><br>
+  Content:<textarea rows="10" columns="100" name="content" placeholder="Write post here..."></textarea><br>
+  <input type="submit" value="Submit">
+</form>
+<br>
+
+{% endblock %}

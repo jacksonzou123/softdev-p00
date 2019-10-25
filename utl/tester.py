@@ -112,7 +112,7 @@ def addBlogHelper(user_id, title, data):
     #print(rand)
     #print(command)
     command = "INSERT INTO blog_tbl VALUES(%s, %s, '%s')" % (rand, user_id, title)
-    print(command)
+    #print(command)
     exec(command)
     return rand;
 
@@ -120,6 +120,10 @@ def addBlogHelper(user_id, title, data):
 #addNewBlog
 def addBlog(user_id, title):
     user_id = int(user_id)
+    q = "SELECT * FROM blog_tbl WHERE user_id = %d AND title = '%s'" % (user_id, title)
+    data = exec(q).fetchone()
+    if (data is not None):
+        return None
     q = "SELECT blog_id FROM blog_tbl WHERE user_id = %d;" % user_id
     data = exec(q).fetchall()
     return addBlogHelper(user_id, title, data)
@@ -151,6 +155,12 @@ def getBlogIDStr(username, title):
 #getBlogTitle
 def getBlogTitle(blog_id):
     q = "SELECT title FROM blog_tbl WHERE blog_id =" + blog_id + ";"
+    data = exec(q).fetchone()
+    return data
+
+def getUserfromBlog(id):
+    id = int(id)
+    q = "SELECT user_id FROM blog_tbl where blog_id = %d" % id
     data = exec(q).fetchone()
     return data
 

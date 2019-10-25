@@ -30,6 +30,9 @@ def register():
 def adduser():
     username = request.form['username']
     password = request.form['password']
+    if (username == '' or password == ''):
+        flash('Fields cannot be left empty', 'red')
+        return redirect(url_for('register'))
     #print(request.method)
     #print(username)
     #print(password)
@@ -73,7 +76,10 @@ def profile():
             name = tester.getUserInfo(id)
             if (name): #if id is valid user id
                 username = name[0]
-                return render_template('profile.html', username=username) #success!
+                isOwner = False
+                if (id == session['userid']):
+                    isOwner = True
+                return render_template('profile.html', username=username, isOwner=isOwner) #success!
             flash('No profile was found for the given url. You have been redirected back to your own profile.', 'red')
         else:
             flash('No profile was found for the given url. You have been redirected back to your own profile.', 'red')
@@ -116,8 +122,14 @@ def updateblog():
       flash('You must log in to access this page!', 'red')
       return redirect(url_for('login'))
     title = request.form['title']
+    if (title == ''):
+        flash('Fields cannot be empty', 'red')
+        return redirect(url_for('createblog'))
     #print(title)
     id = tester.addBlog(session['userid'], title)
+    if (id == None):
+        flash('You have already used this title', 'red')
+        return redirect(url_for('createblog'))
     return redirect(url_for('blog', id=id))
 
 @app.route("/blog")
@@ -126,7 +138,24 @@ def blog():
       flash('You must log in to access this page!', 'red')
       return redirect(url_for('login'))
     #QUERY STRING
-    return "View blog"
+    if (request.args):
+        if ('id' in request.args):
+            id = request.args['id']
+            name = tester.getBlogTitle(id)
+            if (name):
+                title = name[0]
+                isOwner = False
+                user_id = tester.getUserfromBlog(id)[0]
+                username = tester.getUserInfo(user_id)[0]
+                if (int(user_id) == int(session['userid'])):
+                    isOwner = True
+                return render_template('blog.html', username=username, isOwner=isOwner)
+            flash('No blog was found for the given URL. You have been redirected back to your own profile.', 'red')
+        else:
+            flash('No blog was found for the given URL. You have been redirected back to your own profile.', 'red')
+    else:
+        flash('No blog was found for the given URL. You have been redirected back to your own profile.', 'red')
+    return redirect(url_for('profile', id=session['userid']))
 
 @app.route("/entry")
 def entry():
@@ -141,7 +170,7 @@ def editentry():
     if ("userid" not in session):
       flash('You must log in to access this page!', 'red')
       return redirect(url_for('login'))
-    return "Create or edit blog entry"
+    return render_template('createentry.html')
 
 @app.route("/updateentry")
 def updateentry():

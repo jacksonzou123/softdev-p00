@@ -2,15 +2,18 @@
 
 {% block content %}
 <h1>
-  Hello, {{ username }}
+  Profile for: {{ username }}
 </h1>
 
 
 <!-- <a href="/createblog">Create Blog</a> -->
+{% if isOwner %}
 <form>
   <button type="submit" formaction="/createblog">Create Blog</button>
 </form>
 <br><br><br>
+{% endif %}
+
 
 
 <a href=''>Blog Title</a><br>
