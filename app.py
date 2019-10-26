@@ -99,8 +99,11 @@ def search():
       flash('You must log in to access this page!', 'red')
       return redirect(url_for('login'))
     #QUERY STRING
+    username = tester.getUserInfo(session['userid'])[0]
+    submitted = False
+    results = "placeholder stuff"
     #IF NO QUERY STRING RET ONLY FORM
-    return "search form"
+    return render_template('search.html', username=username, submitted=submitted, results=results)
 
 @app.route("/query")
 def query():
