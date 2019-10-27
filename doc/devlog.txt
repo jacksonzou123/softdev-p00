@@ -107,3 +107,6 @@ Finished writing blog functions, added entry functions and methods, created sear
 
 yaruL -- 2019-10-26 23:59
 Finished HTML pages
+
+elizabethD -- 2019-10-27 15:46
+Changed findBlog to return tuples of blog_id and title of blog
