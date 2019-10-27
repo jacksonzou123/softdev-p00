@@ -3,7 +3,7 @@
 {% block content %}
 
 <!-- <a href="/createblog">Create Blog</a> -->
-<h1 style="color:blue;">{{ owner }}'s Profile </h1>
+<h1>{{ owner }}'s Profile </h1>
 <b>Blogs: </b><br>
 {% for title, id in blogs %}
   <a href="/blog?id={{ id }}"> {{ title }}</a><br>
