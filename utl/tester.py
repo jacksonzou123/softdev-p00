@@ -272,11 +272,7 @@ def findBlogStr(search):
         strBlogIDS.append(newID)
     return strBlogIDS
 
-<<<<<<< HEAD
 #search test
 #print(findBlogStr("LION"))
-=======
-#search test    
+#search test
 #print(findBlog("LION"))
-
->>>>>>> 43a6c539c1b40ccb079b33891aa29e3c92da9408
