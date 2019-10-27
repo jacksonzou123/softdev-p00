@@ -104,3 +104,6 @@ Incorporated user permissions in Jinja code and rendered all blogs on user profi
 
 elizabethD -- 2019-10-26 23:03
 Finished writing blog functions, added entry functions and methods, created search using keyword of blog title
+
+yaruL -- 2019-10-26 23:59
+Finished HTML pages
