@@ -25,7 +25,7 @@ def addUserHelper(username, password, data):
 
 #addUser
 def addUser(username, password):
-    q = "SELECT * FROM user_tbl where username = '%s';" % username
+    q = "SELECT * FROM user_tbl WHERE username = '%s';" % username
     data = exec(q).fetchone()
     if (data is None):
         q = "SELECT user_id FROM user_tbl;"
@@ -54,7 +54,7 @@ def verifyUser(username, password):
 
 #getUserID
 def getUserID(username):
-    q = "SELECT user_id FROM user_tbl where username = '%s';" % username
+    q = "SELECT user_id FROM user_tbl WHERE username = '%s';" % username
     data = exec(q).fetchone()
     return data
 
@@ -67,28 +67,17 @@ def getUserIDStr(username):
 
 #getUserInfo
 def getUserInfo(user_id):
-    q = "SELECT username FROM user_tbl where user_id = '%s';" % user_id
+    q = "SELECT username FROM user_tbl WHERE user_id = '%s';" % user_id
     data = exec(q).fetchone()
     return data
 
 #==========================user tests===========================
 
-#addUser - doesn't matter if commented out because checks if user already exists
+##addUser - doesn't matter if commented out because checks if user already exists
 #addUser("Elizabeth","wow")
 #addUser("Emily","this")
 #addUser("Jackie","actually")
 #addUser("Yaru","works")
-
-
-#verifyUser
-#print(verifyUser("Elizabeth","wow"))    #True
-#print(verifyUser("Elizabeth","wo"))     #False
-
-
-#getUser
-#print(getUserID("Elizabeth"))
-#print(getUserIDStr("Emily"))
-#print(getUserID("wow"))        #None
 
 #==========================blog functions===========================
 
@@ -110,7 +99,7 @@ def addBlogHelper(user_id, title, data):
     return rand;
 
 
-#addNewBlog
+#addBlog
 def addBlog(user_id, title):
     user_id = int(user_id)
     q = "SELECT * FROM blog_tbl WHERE user_id = %d AND title = '%s'" % (user_id, title)
@@ -123,7 +112,7 @@ def addBlog(user_id, title):
 
 #==========================blog get methods===========================
 
-#getBlogID, unused
+#getBlogID
 def getBlogID(username, title):
     user_id = getUserIDStr(username)
     q = "SELECT blog_id FROM blog_tbl WHERE user_id =" + user_id + " AND title=" + title + ";"
@@ -131,7 +120,7 @@ def getBlogID(username, title):
     return data
 
 
-#getBlogIDStr for str instead of tuple output, unused 
+#getBlogIDStr for str instead of tuple output
 def getBlogIDStr(username, title):
     blog_id = getBlogID(username, title)
     return str(user_id[0])
@@ -139,38 +128,150 @@ def getBlogIDStr(username, title):
 
 #getBlogTitle
 def getBlogTitle(blog_id):
-    q = "SELECT title FROM blog_tbl WHERE blog_id =" + blog_id + ";"
+    q = "SELECT title FROM blog_tbl WHERE blog_id ='%s';" % blog_id
     data = exec(q).fetchone()
     return data
 
-def getUserfromBlog(id):
-    id = int(id)
-    q = "SELECT user_id FROM blog_tbl where blog_id = %d" % id
+#getBlogTitleStr for str instead of tuple output
+def getBlogTitleStr(blog_id):
+    title = getBlogTitle(blog_id)
+    return str(title[0])
+
+#getUserfromBlog
+def getUserfromBlog(blog_id):
+    q = "SELECT user_id FROM blog_tbl WHERE blog_id = '%s'" % blog_id
     data = exec(q).fetchone()
     return data
 
+#getUserfromBlogStr for str instead of tuple output
+def getUserfromBlogStr(blog_id):
+    user = getUserfromBlog(blog_id)
+    return str(user[0])
+
+#getAllBlogs
 def getAllBlogs(user_id):
-    user_id = int(user_id)
-    q = "SELECT title, blog_id FROM blog_tbl where user_id= %d" % user_id
+    q = "SELECT title, blog_id FROM blog_tbl WHERE user_id= '%s'" % user_id
     data = exec(q).fetchall()
     return data
-#==========================blog get methods===========================
+#==========================blog tests===========================
 
-##addNewBlog
-#addNewBlog("Elizabeth", "Doss", "2019-10-25 04:22")
-#addNewBlog("Jackie", "Lin", "2019-10-25 04:58")
-#addNewBlog("Yaru", "Luo", "2019-10-25 04:59")
-#addNewBlog("Yaru", "Lao", "2019-10-25 05:27")
+##addBlog
+#addBlog(1311963876, "Dogs")
+#addBlog(2039603925, "Lions")
+#addBlog(526656026, "Turtle")
+#addBlog(389070385, "LionCity")
+#addBlog(2039603925, "Greatest Lion")
 
-
-##updateBlog
-#updateBlog("Elizabeth", "Doss", "2019-10-25 05:09")
-#updateBlog("Yaru", "Luo", "2019-10-25 05:20")
-
-
-##DOESN'T WORK
-##sqlite3.OperationalError: no such column: Doss
-#print(getBlogID("Elizabeth", "Doss"))
-#print(getBlogID("Yaru", "Lao"))
 
 #==========================entry functions===========================
+
+#joins blog_id for blog_tbl and entry_tbl
+#command="SELECT blog_tbl.blog_id FROM blog_tbl LEFT JOIN entry_tbl ON blog_tbl.blog_id = entry_tbl.blog_id"
+#exec(command)
+
+#addEntryHelper
+def addEntryHelper(blog_id, title, content, data):
+    rand = random.randrange(limit)
+    while (rand in data):
+        rand = random.randrange(limit)
+    command = "INSERT INTO entry_tbl VALUES(%s, %s, '%s', '%s')" % (rand, blog_id, title, content)
+    #print(command)
+    exec(command)
+    return rand
+
+#addEntry
+def addEntry(blog_id, title, content):
+    blog_id = int(blog_id)
+    q = "SELECT * FROM entry_tbl WHERE blog_id = %d" % blog_id
+    data = exec(q).fetchone()
+    if (data is not None):
+        return None
+    q = "SELECT blog_id FROM blog_tbl"
+    data = exec(q).fetchall()
+    return addEntryHelper(blog_id, title, content, data);
+
+#==========================entry get methods===========================
+
+#getEntryID
+def getEntryID(blog_id, title):
+    q = "SELECT entry_id FROM entry_tbl WHERE blog_id ='%s' AND title='%s';" % (blog_id, title)
+    data = exec(q).fetchone()
+    return data
+
+#getEntryIDStr for str instead of tuple output
+def getEntryIDStr(blog_id, title):
+    entry_id = getEntryID(blog_id, title)
+    return str(user_id[0])
+
+#getEntryTitle
+def getEntryTitle(entry_id):
+    q = "SELECT title FROM entry_tbl WHERE entry_id ='%s';" % entry_id
+    data = exec(q).fetchone()
+    return data
+
+#getEntryTitleStr for str instead of tuple output
+def getEntryTitleStr(entry_id):
+    title = getEntryTitle(entry_id)
+    return str(title[0])
+
+#getEntryContent
+def getEntryContent(entry_id):
+    q = "SELECT content FROM entry_tbl WHERE entry_id ='%s';" % entry_id
+    data = exec(q).fetchone()
+    return data
+
+#getEntryContentStr for str instead of tuple output
+def getEntryContentStr(entry_id):
+    content = getEntryContent(entry_id)
+    return str(content[0])
+
+#getAllEntries
+def getAllEntries(blog_id):
+    q = "SELECT title, content FROM entry_tbl WHERE blog_id= '%s'" % blog_id
+    data = exec(q).fetchall()
+    return data
+
+#==========================entry tests===========================
+
+##addEntry
+#addEntry(230029172, "Dogs wow!", "Dogs are really cute!")
+#addEntry(1216538388, "Lions > all", "Lions are really fierce!")
+
+#==========================search function===========================
+
+#getAllBlogs
+def getAllBlogs():
+    q = "SELECT title FROM blog_tbl"
+    data = exec(q).fetchall()
+    return data
+
+#findBlog
+def findBlog(search):
+    search = search.lower()
+    data = getAllBlogs()
+    blogsList = []
+    for blogT in data:
+        title = str(blogT[0])
+        titleSmall = title.lower()
+        if search in titleSmall:
+            blogsList.append(title)
+            #print(blogsList)
+    blogIDList = []
+    for goodTitles in blogsList:
+        q = "SELECT blog_id,title FROM blog_tbl WHERE title='%s'" % goodTitles
+        data = exec(q).fetchone()
+        blogIDList.append(data)
+    return blogIDList   #list of tuples
+
+#findBlogStr for list of str not list of tuples
+def findBlogStr(search):
+    blogIDList = findBlog(search)
+    strBlogIDS = []
+    for blog_ids in blogIDList:
+        newID = str(blog_ids[0])
+        strBlogIDS.append(newID)
+    return strBlogIDS
+
+#search test    
+#print(findBlog("LION"))
+
