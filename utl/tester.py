@@ -148,7 +148,7 @@ def getUserfromBlogStr(blog_id):
     user = getUserfromBlog(blog_id)
     return str(user[0])
 
-#getAllBlogs
+#getUserBlogs
 def getUserBlogs(user_id):
     q = "SELECT title, blog_id FROM blog_tbl WHERE user_id= '%s'" % user_id
     data = exec(q).fetchall()
@@ -260,6 +260,7 @@ def findBlog(search):
     for goodTitles in blogsList:
         q = "SELECT blog_id,title FROM blog_tbl WHERE title='%s'" % goodTitles
         data = exec(q).fetchone()
+        data = data + (getUserfromBlog(str(data[0])),)
         blogIDList.append(data)
     return blogIDList   #list of tuples
 
