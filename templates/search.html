@@ -1,17 +1,10 @@
 {% extends "base_profile.html" %}
 {% block content %}
-<h1>
-    Hello, {{ username }}
-</h1>
 
-<form action="/search" method="POST">
-    Search: <input type="text" name="keyword"><br>
+<form action="/query" method="POST">
+    Search: <input type="text" name="keyword">
     <input type="submit" value="Submit">
 </form>
-    {% if submitted == true %}
-        {{ results }}
-    {% endif %}
-    
 <br>
 
 {% endblock %}

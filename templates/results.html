@@ -4,13 +4,14 @@
   Hello, {{ username }}
 </h1>
 
-<form action="/search" method="POST">
-  Search: <input type="text" name="keyword"><br>
+<form action="/query" method="POST">
+  Search: <input type="text" name="keyword">
   <input type="submit" value="Submit">
 </form>
-  {% for result in results %}
-    <a href="{{ user.url }}">{{ result }}</a><br>
-  {% endfor %}
+
+{% for result in results %}
+  <a href="{{ user.url }}"> {{ result }} </a><br>
+{% endfor %}
 
 <br>
 

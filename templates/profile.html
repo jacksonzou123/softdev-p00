@@ -1,22 +1,19 @@
 {% extends "base_profile.html" %}
 
 {% block content %}
-<h1>
-  Profile for: {{ username }}
-</h1>
-
 
 <!-- <a href="/createblog">Create Blog</a> -->
+<h1 style="color:blue;">{{ owner }}'s Profile </h1>
+<b>Blogs: </b><br>
+{% for title, id in blogs %}
+  <a href="/blog?id={{ id }}"> {{ title }}</a><br>
+{% endfor %}
+<br>
 {% if isOwner %}
 <form>
   <button type="submit" formaction="/createblog">Create Blog</button>
 </form>
-<br><br><br>
+<br><br>
 {% endif %}
-
-Blogs: <br>
-{% for title, id in blogs %}
-  <a href="/blog?id={{ id }}"> {{ title }}</a><br>
-{% endfor %}
 
 {% endblock %}

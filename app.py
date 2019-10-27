@@ -79,8 +79,8 @@ def profile():
                 isOwner = False
                 if (id == session['userid']):
                     isOwner = True
-                blogs = tester.getAllBlogs(id)
-                return render_template('profile.html', username=username, isOwner=isOwner, blogs = blogs) #success!
+                blogs = tester.getUserBlogs(id)
+                return render_template('profile.html', username=username, owner=username, isOwner=isOwner, blogs = blogs) #success!
             flash('No profile was found for the given url. You have been redirected back to your own profile.', 'red')
         else:
             flash('No profile was found for the given url. You have been redirected back to your own profile.', 'red')
@@ -91,7 +91,8 @@ def about():
     if ("userid" not in session):
       flash('You must log in to access this page!', 'red')
       return redirect(url_for('login'))
-    return render_template('about.html')
+    username = tester.getUserInfo(session['userid'])[0]
+    return render_template('about.html', username=username)
 
 @app.route("/search")
 def search():
@@ -100,17 +101,21 @@ def search():
       return redirect(url_for('login'))
     #QUERY STRING
     username = tester.getUserInfo(session['userid'])[0]
-    submitted = False
-    results = "placeholder stuff"
-    #IF NO QUERY STRING RET ONLY FORM
-    return render_template('search.html', username=username, submitted=submitted, results=results)
+    results = []
+    if (request.args):
+        if ('query' in request.args):
+            query = request.args['query']
+            results = tester.findBlog(query)
+            print(results)
+    return render_template('search.html', username=username, results=results)
 
-@app.route("/query")
+@app.route("/query", methods=['POST'])
 def query():
     if ("userid" not in session):
       flash('You must log in to access this page!', 'red')
       return redirect(url_for('login'))
-    return "process search form"
+    query = request.form['keyword']
+    return redirect(url_for('search', query=query))
 
 @app.route("/createblog")
 def createblog():
@@ -175,7 +180,8 @@ def editentry():
     if ("userid" not in session):
       flash('You must log in to access this page!', 'red')
       return redirect(url_for('login'))
-    return render_template('createentry.html')
+    username = tester.getUserInfo(session['userid'])[0]
+    return render_template('createentry.html', username=username)
 
 @app.route("/updateentry", methods=['POST'])
 def updateentry():

@@ -149,7 +149,7 @@ def getUserfromBlogStr(blog_id):
     return str(user[0])
 
 #getAllBlogs
-def getAllBlogs(user_id):
+def getUserBlogs(user_id):
     q = "SELECT title, blog_id FROM blog_tbl WHERE user_id= '%s'" % user_id
     data = exec(q).fetchall()
     return data
@@ -269,6 +269,5 @@ def findBlogStr(search):
         strBlogIDS.append(newID)
     return strBlogIDS
 
-#search test    
+#search test
 #print(findBlogStr("LION"))
-

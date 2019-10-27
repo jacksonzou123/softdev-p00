@@ -1,11 +1,6 @@
 {% extends "base_profile.html" %}
 
 {% block content %}
-<h1>
-  Hello, {{ username }}
-</h1>
-
-
 <form action="/updateblog" method="POST">
   Title: <input type="text" name="title">
   <input type="submit" value="Submit">
