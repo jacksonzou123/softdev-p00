@@ -156,9 +156,12 @@ def getUserBlogs(user_id):
 #==========================blog tests===========================
 
 ##addBlog
-#addBlog(554622961, "Dogs")
-#addBlog(71313819475, "Lions")
-#addBlog(687289123, "Turtle")
+#addBlog(1311963876, "Dogs")
+#addBlog(2039603925, "Lions")
+#addBlog(526656026, "Turtle")
+#addBlog(389070385, "LionCity")
+#addBlog(2039603925, "Greatest Lion")
+
 
 #==========================entry functions===========================
 
@@ -231,8 +234,8 @@ def getAllEntries(blog_id):
 #==========================entry tests===========================
 
 ##addEntry
-#addEntry(1215857112, "Dogs are really cute!")
-#addEntry(772143637, "Lions are really fierce!")
+#addEntry(230029172, "Dogs wow!", "Dogs are really cute!")
+#addEntry(1216538388, "Lions > all", "Lions are really fierce!")
 
 #==========================search function===========================
 
@@ -255,7 +258,7 @@ def findBlog(search):
             #print(blogsList)
     blogIDList = []
     for goodTitles in blogsList:
-        q = "SELECT blog_id FROM blog_tbl WHERE title='%s'" % goodTitles
+        q = "SELECT blog_id,title FROM blog_tbl WHERE title='%s'" % goodTitles
         data = exec(q).fetchone()
         blogIDList.append(data)
     return blogIDList   #list of tuples
@@ -269,5 +272,11 @@ def findBlogStr(search):
         strBlogIDS.append(newID)
     return strBlogIDS
 
+<<<<<<< HEAD
 #search test
 #print(findBlogStr("LION"))
+=======
+#search test    
+#print(findBlog("LION"))
+
+>>>>>>> 43a6c539c1b40ccb079b33891aa29e3c92da9408
