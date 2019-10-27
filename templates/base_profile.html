@@ -9,11 +9,14 @@
     <center>
       {% block navbar %}
       <div class="topnav">
-	<a href="/user">Profile</a>
+	<a href="/user">My Profile</a>
 	<a href="/search">Search</a>
 	<a href="/about">About</a>
 	<a href="/logout">Log out</a>
       </div>
+      <h4>
+	Hello, {{ username }}!
+      </h4>
       {% endblock %}
       {% block content %}
       {% endblock %}
