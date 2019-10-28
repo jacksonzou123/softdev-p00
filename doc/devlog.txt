@@ -118,4 +118,7 @@ elizabethD -- 2019-10-27 18:48
 Changed findBlog to return tuples of blog_id, title of blog, and username
 
 jackieL -- 2019-10-27 08:22
-Incorporated querystrings and new database functions to display blogs on profile page and entries on blog pages, reformatted some of the other pages 
+Incorporated querystrings and new database functions to display blogs on profile page and entries on blog pages, reformatted some of the other pages
+
+jackieL -- 2019-10-27 10:11
+Incorporated database entry functions to render entries on blogs and allow owner to edit them, also made small changes to how HTML pages looked like 

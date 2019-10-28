@@ -7,9 +7,9 @@
 </form>
 <br>
 
-{% for id, title, owner in results %}
-  <a href="/blog?id={{id}}">{{ title}}</a><br>
-  By: {{ owner }}
+{% for id, title, owner_id, owner in results %}
+  <b><a href="/blog?id={{id}}">{{ title}}</a></b><br>
+  By:   <a href="/user?id={{owner_id}}">{{ owner }}</a><br>
 {% endfor %}
 
 {% endblock %}

@@ -1,21 +1,26 @@
 {% extends "base_profile.html" %}
 
 {% block content %}
-<b>Blog Title: </b>{{ title }}<br>
-<b>By: </b><a href="{{ userlink }}">{{ username }}</a><br><br>
+<div style="font-size:20px;">
+  <b>Blog Title: </b>{{ title }}<br>
+  <b>By: </b><a href="{{ userlink }}">{{ username }}</a><br><br>
+</div><br>
+
+{% for title, content, id in entries %}
+  <div style="width:50%; background-color:rgba(220, 220, 220, 0.55); padding:15px;">
+    <b>{{ title }}</b>
+    {% if isOwner %}
+    <a href="/editentry?id={{id}}"><button type="submit">Edit</button></a>
+    {% endif %}
+    <br>
+    {{ content }}
+  </div><br>
+{% endfor %}
 
 {% if isOwner %}
 <form>
   <button type="submit" formaction="/editentry">Create Entry</button>
 </form>
 {% endif %}
-
-{% for entry in entries %}
-  <p>
-    {{ entry }}
-  </p>
-{% endfor %}
-<br>
-
 
 {% endblock %}

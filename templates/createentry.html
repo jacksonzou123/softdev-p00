@@ -1,9 +1,10 @@
 {% extends "base_profile.html" %}
 
 {% block content %}
+<br><br>
 <form action="/updateentry" method="POST">
-  Header: <input type="text" name="title"><br>
-  Content:<textarea rows="10" columns="100" name="content" placeholder="Write post here..."></textarea><br>
+  Title: <input type="text" name="title" placeholder="Enter title..."value="{{temp_title}}" size="47"><br>
+  <textarea rows="10" cols="50" name="content" placeholder="Write your post here...">{{temp_content}}</textarea><br>
   <input type="submit" value="Submit">
 </form>
 <br>

@@ -182,7 +182,7 @@ def addEntryHelper(blog_id, title, content, data):
 #addEntry
 def addEntry(blog_id, title, content):
     blog_id = int(blog_id)
-    q = "SELECT * FROM entry_tbl WHERE blog_id = %d" % blog_id
+    q = "SELECT * FROM entry_tbl WHERE blog_id = %d AND title='%s'" % (blog_id, title)
     data = exec(q).fetchone()
     if (data is not None):
         return None
@@ -207,29 +207,24 @@ def getEntryIDStr(blog_id, title):
 def getEntryTitle(entry_id):
     q = "SELECT title FROM entry_tbl WHERE entry_id ='%s';" % entry_id
     data = exec(q).fetchone()
-    return data
-
-#getEntryTitleStr for str instead of tuple output
-def getEntryTitleStr(entry_id):
-    title = getEntryTitle(entry_id)
-    return str(title[0])
+    return str(data[0])
 
 #getEntryContent
 def getEntryContent(entry_id):
     q = "SELECT content FROM entry_tbl WHERE entry_id ='%s';" % entry_id
     data = exec(q).fetchone()
-    return data
-
-#getEntryContentStr for str instead of tuple output
-def getEntryContentStr(entry_id):
-    content = getEntryContent(entry_id)
-    return str(content[0])
+    return str(data[0])
 
 #getAllEntries
 def getAllEntries(blog_id):
-    q = "SELECT title, content FROM entry_tbl WHERE blog_id= '%s'" % blog_id
+    q = "SELECT title, content, entry_id FROM entry_tbl WHERE blog_id= '%s'" % blog_id
     data = exec(q).fetchall()
     return data
+
+def getBlogfromEntry(entry_id):
+    q = "SELECT blog_id FROM entry_tbl WHERE entry_id = '%s'" % entry_id
+    data = exec(q).fetchone()
+    return str(data[0])
 
 #==========================entry tests===========================
 
@@ -258,7 +253,7 @@ def findBlog(search):
             #print(blogsList)
     blogIDList = []
     for goodTitles in blogsList:
-        q = "SELECT blog_id,title FROM blog_tbl WHERE title='%s'" % goodTitles
+        q = "SELECT blog_id, title, user_id FROM blog_tbl WHERE title='%s'" % goodTitles
         data = exec(q).fetchone()
         data = data + getUserInfo(getUserfromBlog(str(data[0])))
         blogIDList.append(data)

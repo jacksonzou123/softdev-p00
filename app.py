@@ -30,12 +30,16 @@ def register():
 def adduser():
     username = request.form['username']
     password = request.form['password']
+    confirm = request.form['confirm']
     if (username == '' or password == ''):
         flash('Fields cannot be left empty', 'red')
         return redirect(url_for('register'))
     #print(request.method)
     #print(username)
     #print(password)
+    if (password != confirm):
+        flash('Passwords do not match!', 'red')
+        return redirect(url_for('register'))
     added = tester.addUser(username, password)
     if (added):
         flash('You have been registered successfully. Please log in.', 'green')
@@ -150,16 +154,17 @@ def blog():
     if (request.args):
         if ('id' in request.args):
             id = request.args['id']
-            name = tester.getBlogTitle(id)[0]
+            name = tester.getBlogTitleStr(id)
             if (name):
-                title = name[0]
                 isOwner = False
                 user_id = tester.getUserfromBlog(id)[0]
                 username = tester.getUserInfo(user_id)[0]
                 if (int(user_id) == int(session['userid'])):
                     isOwner = True
                 userlink = "/user?id=%s" % user_id
-                return render_template('blog.html', username=username, isOwner=isOwner, title=name, userlink=userlink)
+                session['blogid'] = id
+                entries = tester.getAllEntries(id)
+                return render_template('blog.html', username=username, isOwner=isOwner, title=name, userlink=userlink, entries=entries)
             flash('No blog was found for the given URL. You have been redirected back to your own profile.', 'red')
         else:
             flash('No blog was found for the given URL. You have been redirected back to your own profile.', 'red')
@@ -167,21 +172,20 @@ def blog():
         flash('No blog was found for the given URL. You have been redirected back to your own profile.', 'red')
     return redirect(url_for('profile', id=session['userid']))
 
-@app.route("/entry")
-def entry():
-    if ("userid" not in session):
-      flash('You must log in to access this page!', 'red')
-      return redirect(url_for('login'))
-    #QUERY STRING
-    return "View blog entry"
-
 @app.route("/editentry")
 def editentry():
     if ("userid" not in session):
       flash('You must log in to access this page!', 'red')
       return redirect(url_for('login'))
     username = tester.getUserInfo(session['userid'])[0]
-    return render_template('createentry.html', username=username)
+    temp_title = ""
+    temp_content = ""
+    if (request.args):
+        if ('id' in request.args):
+            id = request.args['id']
+            temp_title = tester.getEntryTitle(id)
+            temp_content = tester.getEntryContent(id)
+    return render_template('createentry.html', username=username, temp_title=temp_title, temp_content=temp_content)
 
 @app.route("/updateentry", methods=['POST'])
 def updateentry():
@@ -193,7 +197,14 @@ def updateentry():
     if (heading == '' or content == ''):
         flash('Fields cannot be empty', 'red')
         return redirect(url_for('editentry'))
-    return "process edit entry form"
+    title = request.form['title']
+    content = request.form['content']
+    id = session['blogid']
+    entry = tester.addEntry(id, title, content)
+    if (entry == None):
+        flash("You have already used this heading", 'red')
+        return redirect(url_for('editentry'))
+    return redirect(url_for('blog', id=id))
 
 @app.route("/logout")
 def logout():
