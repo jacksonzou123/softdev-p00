@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- template for all pages that require user to be logged in -->
 <html>
   <head>
     {% block head %}
@@ -7,6 +8,7 @@
   </head>
   <body>
     <center>
+      <!-- navigation bar -->
       {% block navbar %}
       <div class="topnav">
         <b>Hello, {{ username }}!</b>
@@ -20,16 +22,19 @@
         </table>
       </div><hr>
       {% endblock %}
+
+      <!-- where body goes -->
       {% block content %}
       {% endblock %}
 
+      <!-- display error messages -->
       {% set msgs = get_flashed_messages(with_categories=true) %}
       {% for category, msg in msgs %}
         <p style="color: {{ category }};">
           {{ msg }}
         </p>
       {% endfor %}
-      
+
     </center>
   </body>
 
