@@ -260,8 +260,9 @@ def findBlog(search):
     for goodTitles in blogsList:
         q = "SELECT blog_id,title FROM blog_tbl WHERE title='%s'" % goodTitles
         data = exec(q).fetchone()
-        data = data + (getUserInfo(getUserfromBlog(str(data[0]))),)
+        data = data + getUserInfo(getUserfromBlog(str(data[0])))
         blogIDList.append(data)
+
     return blogIDList   #list of tuples
 
 #findBlogStr for list of str not list of tuples
