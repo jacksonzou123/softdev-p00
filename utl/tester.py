@@ -176,8 +176,7 @@ def addEntryHelper(blog_id, title, content, data):
         rand = random.randrange(limit)
     command = "INSERT INTO entry_tbl VALUES(%s, %s, '%s', '%s')" % (rand, blog_id, title, content)
     #print(command)
-    exec(command)
-    return rand
+    return exec(command)
 
 #addEntry
 def addEntry(blog_id, title, content):
@@ -189,6 +188,18 @@ def addEntry(blog_id, title, content):
     q = "SELECT blog_id FROM blog_tbl"
     data = exec(q).fetchall()
     return addEntryHelper(blog_id, title, content, data);
+
+def editEntry(entry_id, title, content):
+    entry_id = int(entry_id)
+    q = "SELECT * FROM entry_tbl WHERE title='%s' AND entry_id != %d" % (title, entry_id)
+    data = exec(q).fetchall()
+    print(len(data))
+    if (len(data) > 0):
+        return False
+    q = "UPDATE entry_tbl SET title = '%s', content = '%s' WHERE entry_id = %d" % (title, content, entry_id)
+    exec(q)
+    return True
+
 
 #==========================entry get methods===========================
 

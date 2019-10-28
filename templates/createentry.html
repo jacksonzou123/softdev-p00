@@ -2,7 +2,7 @@
 
 {% block content %}
 <br><br>
-<form action="/updateentry" method="POST">
+<form action="{{link}}" method="POST">
   Title: <input type="text" name="title" placeholder="Enter title..."value="{{temp_title}}" size="47"><br>
   <textarea rows="10" cols="50" name="content" placeholder="Write your post here...">{{temp_content}}</textarea><br>
   <input type="submit" value="Submit">

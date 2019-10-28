@@ -110,7 +110,7 @@ def search():
         if ('query' in request.args):
             query = request.args['query']
             results = tester.findBlog(query)
-            print(results)
+            #print(results)
     return render_template('search.html', username=username, results=results)
 
 @app.route("/query", methods=['POST'])
@@ -180,30 +180,38 @@ def editentry():
     username = tester.getUserInfo(session['userid'])[0]
     temp_title = ""
     temp_content = ""
+    link = "/updateentry"
     if (request.args):
         if ('id' in request.args):
             id = request.args['id']
             temp_title = tester.getEntryTitle(id)
             temp_content = tester.getEntryContent(id)
-    return render_template('createentry.html', username=username, temp_title=temp_title, temp_content=temp_content)
+            link = link + "?id=%s" % id
+    return render_template('createentry.html', username=username, temp_title=temp_title, temp_content=temp_content, link=link)
 
 @app.route("/updateentry", methods=['POST'])
 def updateentry():
     if ("userid" not in session):
       flash('You must log in to access this page!', 'red')
       return redirect(url_for('login'))
-    heading = request.form['title']
-    content = request.form['content']
-    if (heading == '' or content == ''):
-        flash('Fields cannot be empty', 'red')
-        return redirect(url_for('editentry'))
     title = request.form['title']
     content = request.form['content']
     id = session['blogid']
-    entry = tester.addEntry(id, title, content)
-    if (entry == None):
-        flash("You have already used this heading", 'red')
+    if (title == '' or content == ''):
+        flash('Fields cannot be empty', 'red')
         return redirect(url_for('editentry'))
+    if (request.args):
+        if ('id' in request.args):
+            entry_id = request.args['id']
+            entry = tester.editEntry(entry_id, title, content)
+            if (not entry):
+                flash("Title is already being used for another post", 'red')
+                return redirect(url_for('editentry', id=entry_id))
+    else:
+        entry = tester.addEntry(id, title, content)
+        if (entry == None):
+            flash("You have already used this heading", 'red')
+            return redirect(url_for('editentry'))
     return redirect(url_for('blog', id=id))
 
 @app.route("/logout")
