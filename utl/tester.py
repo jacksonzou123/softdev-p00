@@ -135,6 +135,8 @@ def getBlogTitle(blog_id):
 #getBlogTitleStr for str instead of tuple output
 def getBlogTitleStr(blog_id):
     title = getBlogTitle(blog_id)
+    if (title is None):
+        return ""
     return str(title[0])
 
 #getUserfromBlog
@@ -193,7 +195,7 @@ def editEntry(entry_id, title, content):
     entry_id = int(entry_id)
     q = "SELECT * FROM entry_tbl WHERE title='%s' AND entry_id != %d" % (title, entry_id)
     data = exec(q).fetchall()
-    print(len(data))
+    #print(len(data))
     if (len(data) > 0):
         return False
     q = "UPDATE entry_tbl SET title = '%s', content = '%s' WHERE entry_id = %d" % (title, content, entry_id)
@@ -218,12 +220,16 @@ def getEntryIDStr(blog_id, title):
 def getEntryTitle(entry_id):
     q = "SELECT title FROM entry_tbl WHERE entry_id ='%s';" % entry_id
     data = exec(q).fetchone()
+    if (data is None):
+        return ""
     return str(data[0])
 
 #getEntryContent
 def getEntryContent(entry_id):
     q = "SELECT content FROM entry_tbl WHERE entry_id ='%s';" % entry_id
     data = exec(q).fetchone()
+    if (data is None):
+        return ""
     return str(data[0])
 
 #getAllEntries

@@ -156,16 +156,17 @@ def blog():
             id = request.args['id']
             name = tester.getBlogTitleStr(id)
             if (name):
+                session['blogid'] = id
                 isOwner = False
                 user_id = tester.getUserfromBlog(id)[0]
                 username = tester.getUserInfo(user_id)[0]
                 if (int(user_id) == int(session['userid'])):
                     isOwner = True
                 userlink = "/user?id=%s" % user_id
-                session['blogid'] = id
                 entries = tester.getAllEntries(id)
                 return render_template('blog.html', username=username, isOwner=isOwner, title=name, userlink=userlink, entries=entries)
-            flash('No blog was found for the given URL. You have been redirected back to your own profile.', 'red')
+            else:
+                flash('No blog was found for the given URL. You have been redirected back to your own profile.', 'red')
         else:
             flash('No blog was found for the given URL. You have been redirected back to your own profile.', 'red')
     else:
