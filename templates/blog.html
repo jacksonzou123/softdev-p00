@@ -11,18 +11,27 @@
 
 <!-- display all entries in blog -->
 {% for title, content, id in entries %}
-  <div style="width:50%; background-color:rgba(220, 220, 220, 0.55); padding:15px;">
-    <b>{{ title }}</b>
-    <br>
-    {{ content }}
-    <br>
-    <!-- owner of entry allowed to edit and delete entry -->
+
+<table width="50%" bgcolor="#EEEEEE" cellspacing="10">
+  <tr>
+    <td align="center">
+      <b>{{ title }}</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      {{ content }}
+    </td>
+  </tr>
+  <tr>
     {% if isOwner %}
-    <br>
-    <a href="/editentry?id={{id}}"><button type="submit" style="border:none; background-color:white; width:50px; margin-right:10px;">Edit</button></a>
-    <a href="/deleteentry?id={{id}}"><button type="submit" style="color:white; background-color:red; border:none;">Delete</button></a>
+    <td align="center">
+      <a href="/editentry?id={{id}}"><button type="submit">Edit</button></a>
+        <a href="/deleteentry?id={{id}}"><button type="submit">Delete</button></a>
+    </td>
     {% endif %}
-  </div><br>
+  </tr>
+</table><br>
 {% endfor %}
 
 <!-- if logged in user owns the blog, allow them to create entry -->

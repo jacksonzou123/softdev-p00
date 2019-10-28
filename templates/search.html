@@ -11,10 +11,18 @@
 
 <!-- display all entries that match search keyword -->
 {% for id, title, owner_id, owner in results %}
-<div style="width:30%; background-color:rgba(220, 220, 220, 0.55); padding:15px;">
-  Blog Title: <b><a href="/blog?id={{id}}">{{ title}}</a></b><br>
-  Created By: <a href="/user?id={{owner_id}}">{{ owner }}</a>
-</div><br>
+<table bgcolor="#EEEEEE" opacity="0.55" width="30%" cellspacing="10">
+  <tr>
+    <td>
+      Blog Title: <b><a href="/blog?id={{id}}">{{ title}}</a></b>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Created By: <a href="/user?id={{owner_id}}">{{ owner }}</a>
+    </td>
+  </tr>
+</table><br>
 {% endfor %}
 
 {% endblock %}
