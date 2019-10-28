@@ -131,3 +131,6 @@ Uploaded final version of design doc to reflect features we finished and updated
 
 jackieL -- 2019-10-27 22:51
 Final changes with error handling for faulty URLs 
+
+emilyZ -- 2019-10-28 00:53
+Final change - handling extra spaces before and after search.

@@ -259,12 +259,12 @@ def getAllBlogs():
 
 #findBlog
 def findBlog(search):
-    search = search.lower()
+    search = search.lower().strip()
     data = getAllBlogs()
     blogsList = []
     for blogT in data:
         title = str(blogT[0])
-        titleSmall = title.lower()
+        titleSmall = title.lower().strip()
         if search in titleSmall:
             blogsList.append(title)
             #print(blogsList)
