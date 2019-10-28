@@ -1,13 +1,8 @@
 {% extends "base_profile.html" %}
 
 {% block content %}
-<h1>
-  Blog by:
-    <a href="{{ userlink }}">{{ username }}</a>
-</h1>
-<h3>
-  Blog Title: {{ title }}
-</h3>
+<b>Blog Title: </b>{{ title }}<br>
+<b>By: </b><a href="{{ userlink }}">{{ username }}</a><br><br>
 
 {% if isOwner %}
 <form>
