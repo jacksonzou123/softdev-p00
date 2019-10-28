@@ -149,3 +149,6 @@ Added Flask code and database function to delete entry from blog
 
 jackieL -- 2019-10-29 14:00
 Displayed list of all users on about page, reformatted some pages
+
+emilyZ -- 2019-10-29 14:54
+Update site map on new user display and delete entry
