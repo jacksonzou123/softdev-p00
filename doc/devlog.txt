@@ -124,4 +124,7 @@ jackieL -- 2019-10-27 22:11
 Incorporated database entry functions to render entries on blogs and allow owner to edit them, also made small changes to how HTML pages looked like
 
 jackieL -- 2019-10-27 22:58
-Modified database functions for editing an entry 
+Modified database functions for editing an entry
+
+jackieL -- 2019-10-27 23:32
+Uploaded final version of design doc to reflect features we finished and updated site map 
