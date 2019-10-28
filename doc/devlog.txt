@@ -113,3 +113,6 @@ Finished HTML pages
 
 elizabethD -- 2019-10-27 15:46
 Changed findBlog to return tuples of blog_id and title of blog
+
+elizabethD -- 2019-10-27 18:48
+Changed findBlog to return tuples of blog_id, title of blog, and username
