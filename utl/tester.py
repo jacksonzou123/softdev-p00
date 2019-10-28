@@ -12,10 +12,11 @@ from utl.db_builder import exec
 limit = sys.maxsize
 #==========================user functions===========================
 
-#helper function
+#helper function for addUser
 def addUserHelper(username, password, data):
     rand = random.randrange(limit)
     while (rand in data):
+        #if the id is already in use
         rand = random.randrange(limit)
     #print(rand)
     command = "INSERT INTO user_tbl VALUES(" + str(rand) + ",\"" + username + "\",\"" + password + "\")"
@@ -23,7 +24,7 @@ def addUserHelper(username, password, data):
     exec(command)
 
 
-#addUser
+#takes in username/password, generates user_id, adds them to user_tbl
 def addUser(username, password):
     q = "SELECT * FROM user_tbl WHERE username = '%s';" % username
     data = exec(q).fetchone()
@@ -35,16 +36,17 @@ def addUser(username, password):
     return False #if username already exists
 
 
-#helper function
+#helper function for verifyUser
 def verifyUserHelper(username, password, data):
     myEntry = (username, password)
     #print(myEntry)
     if (myEntry in data):
+        #if user is in database
         return True
     return False
 
 
-#verifyUser
+#takes in username/password, checks them to user_tbl
 def verifyUser(username, password):
     q = "SELECT username,password FROM user_tbl;"
     data = exec(q).fetchall()
@@ -52,20 +54,20 @@ def verifyUser(username, password):
 
 #==========================user get methods===========================
 
-#getUserID
+#takes in username, returns user_id from user_tbl
 def getUserID(username):
     q = "SELECT user_id FROM user_tbl WHERE username = '%s';" % username
     data = exec(q).fetchone()
     return data
 
 
-#getUserIDStr for str instead of tuple output
+#str instead of tuple output of getUserID
 def getUserIDStr(username):
     user_id = getUserID(username)
     return str(user_id[0])
 
 
-#getUserInfo
+#takes in user_id, returns username from user_tbl
 def getUserInfo(user_id):
     q = "SELECT username FROM user_tbl WHERE user_id = '%s';" % user_id
     data = exec(q).fetchone()
@@ -73,7 +75,6 @@ def getUserInfo(user_id):
 
 #==========================user tests===========================
 
-##addUser - doesn't matter if commented out because checks if user already exists
 #addUser("Elizabeth","wow")
 #addUser("Emily","this")
 #addUser("Jackie","actually")
@@ -86,10 +87,11 @@ def getUserInfo(user_id):
 #exec(command)
 
 
-#helper function
+#helper function for addBlog
 def addBlogHelper(user_id, title, data):
     rand = random.randrange(limit)
     while (rand in data):
+        #if the id is already in use
         rand = random.randrange(limit)
     #print(rand)
     #print(command)
@@ -99,7 +101,7 @@ def addBlogHelper(user_id, title, data):
     return rand;
 
 
-#addBlog
+#takes in user_id/title, generates blog_id, adds them to blog_tbl, returns blog_id
 def addBlog(user_id, title):
     user_id = int(user_id)
     q = "SELECT * FROM blog_tbl WHERE user_id = %d AND title = '%s'" % (user_id, title)
@@ -112,7 +114,7 @@ def addBlog(user_id, title):
 
 #==========================blog get methods===========================
 
-#getBlogID
+#takes in username/title, returns blog_id from blog_tbl
 def getBlogID(username, title):
     user_id = getUserIDStr(username)
     q = "SELECT blog_id FROM blog_tbl WHERE user_id =" + user_id + " AND title=" + title + ";"
@@ -120,50 +122,48 @@ def getBlogID(username, title):
     return data
 
 
-#getBlogIDStr for str instead of tuple output
+#str instead of tuple output of getBlogID
 def getBlogIDStr(username, title):
     blog_id = getBlogID(username, title)
     return str(user_id[0])
 
 
-#getBlogTitle
+#takes in blog_id, returns title from blog_tbl
 def getBlogTitle(blog_id):
     q = "SELECT title FROM blog_tbl WHERE blog_id ='%s';" % blog_id
     data = exec(q).fetchone()
     return data
 
-#getBlogTitleStr for str instead of tuple output
+#str instead of tuple output of getBlogTitle
 def getBlogTitleStr(blog_id):
     title = getBlogTitle(blog_id)
     if (title is None):
         return ""
     return str(title[0])
 
-#getUserfromBlog
+#takes in blog_id, returns user_id from blog_tbl
 def getUserfromBlog(blog_id):
     q = "SELECT user_id FROM blog_tbl WHERE blog_id = '%s'" % blog_id
     data = exec(q).fetchone()
     return data
 
-#getUserfromBlogStr for str instead of tuple output
+#str instead of tuple output of getUserfromBlog
 def getUserfromBlogStr(blog_id):
     user = getUserfromBlog(blog_id)
     return str(user[0])
 
-#getUserBlogs
+#takes in user_id, returns all blogs created by a user from blog_tbl
 def getUserBlogs(user_id):
     q = "SELECT title, blog_id FROM blog_tbl WHERE user_id= '%s'" % user_id
     data = exec(q).fetchall()
     return data
 #==========================blog tests===========================
 
-##addBlog
 #addBlog(1311963876, "Dogs")
 #addBlog(2039603925, "Lions")
 #addBlog(526656026, "Turtle")
 #addBlog(389070385, "LionCity")
 #addBlog(2039603925, "Greatest Lion")
-
 
 #==========================entry functions===========================
 
@@ -171,16 +171,17 @@ def getUserBlogs(user_id):
 #command="SELECT blog_tbl.blog_id FROM blog_tbl LEFT JOIN entry_tbl ON blog_tbl.blog_id = entry_tbl.blog_id"
 #exec(command)
 
-#addEntryHelper
+#helper function for addEntry
 def addEntryHelper(blog_id, title, content, data):
     rand = random.randrange(limit)
     while (rand in data):
+        #if id is already in use
         rand = random.randrange(limit)
     command = "INSERT INTO entry_tbl VALUES(%s, %s, '%s', '%s')" % (rand, blog_id, title, content)
     #print(command)
     return exec(command)
 
-#addEntry
+#takes in blog_id/title/content, generates entry_id, adds them to entry_tbl, returns entry_id
 def addEntry(blog_id, title, content):
     blog_id = int(blog_id)
     q = "SELECT * FROM entry_tbl WHERE blog_id = %d AND title='%s'" % (blog_id, title)
@@ -191,6 +192,7 @@ def addEntry(blog_id, title, content):
     data = exec(q).fetchall()
     return addEntryHelper(blog_id, title, content, data);
 
+#takes in entry_id/title/content, adds them to entry_tbl for that entry
 def editEntry(entry_id, title, content):
     entry_id = int(entry_id)
     q = "SELECT * FROM entry_tbl WHERE title='%s' AND entry_id != %d" % (title, entry_id)
@@ -205,18 +207,18 @@ def editEntry(entry_id, title, content):
 
 #==========================entry get methods===========================
 
-#getEntryID
+#takes in blog_id/title, returns entry_id from entry_tbl
 def getEntryID(blog_id, title):
     q = "SELECT entry_id FROM entry_tbl WHERE blog_id ='%s' AND title='%s';" % (blog_id, title)
     data = exec(q).fetchone()
     return data
 
-#getEntryIDStr for str instead of tuple output
+#str instead of tuple output of getEntryID
 def getEntryIDStr(blog_id, title):
     entry_id = getEntryID(blog_id, title)
     return str(user_id[0])
 
-#getEntryTitle
+#takes in entry_id, returns title from entry_tbl
 def getEntryTitle(entry_id):
     q = "SELECT title FROM entry_tbl WHERE entry_id ='%s';" % entry_id
     data = exec(q).fetchone()
@@ -224,7 +226,7 @@ def getEntryTitle(entry_id):
         return ""
     return str(data[0])
 
-#getEntryContent
+#takes in entry_id, returns content from entry_tbl
 def getEntryContent(entry_id):
     q = "SELECT content FROM entry_tbl WHERE entry_id ='%s';" % entry_id
     data = exec(q).fetchone()
@@ -232,12 +234,13 @@ def getEntryContent(entry_id):
         return ""
     return str(data[0])
 
-#getAllEntries
+#takes in blog_id, returns all entries for that blog from entry_tbl
 def getAllEntries(blog_id):
     q = "SELECT title, content, entry_id FROM entry_tbl WHERE blog_id= '%s'" % blog_id
     data = exec(q).fetchall()
     return data
 
+#takes in entry_id, returns blog_id from entry_tbl
 def getBlogfromEntry(entry_id):
     q = "SELECT blog_id FROM entry_tbl WHERE entry_id = '%s'" % entry_id
     data = exec(q).fetchone()
@@ -245,23 +248,24 @@ def getBlogfromEntry(entry_id):
 
 #==========================entry tests===========================
 
-##addEntry
 #addEntry(230029172, "Dogs wow!", "Dogs are really cute!")
 #addEntry(1216538388, "Lions > all", "Lions are really fierce!")
 
 #==========================search function===========================
 
-#getAllBlogs
+#returns a tuple of all blogs in blog_tbl
 def getAllBlogs():
     q = "SELECT title FROM blog_tbl"
     data = exec(q).fetchall()
     return data
 
-#findBlog
+#takes in search phrase, searches for all instances of that phrase from blog_tbl
+#non case-sensitive
 def findBlog(search):
     search = search.lower().strip()
     data = getAllBlogs()
     blogsList = []
+    #creates a list of blogs with acceptable titles
     for blogT in data:
         title = str(blogT[0])
         titleSmall = title.lower().strip()
@@ -269,6 +273,7 @@ def findBlog(search):
             blogsList.append(title)
             #print(blogsList)
     blogIDList = []
+    #creates a list of tuples containing blog_id, title, user_id, and username
     for goodTitles in blogsList:
         q = "SELECT blog_id, title, user_id FROM blog_tbl WHERE title='%s'" % goodTitles
         data = exec(q).fetchone()
@@ -277,7 +282,7 @@ def findBlog(search):
 
     return blogIDList   #list of tuples
 
-#findBlogStr for list of str not list of tuples
+#list of str not list of tuples of findBlog
 def findBlogStr(search):
     blogIDList = findBlog(search)
     strBlogIDS = []
@@ -286,7 +291,6 @@ def findBlogStr(search):
         strBlogIDS.append(newID)
     return strBlogIDS
 
-#search test
+#==========================search tests===========================
 #print(findBlogStr("LION"))
-#search test
 #print(findBlog("LION"))

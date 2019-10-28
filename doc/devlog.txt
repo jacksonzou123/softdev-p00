@@ -140,3 +140,6 @@ Added comments to app.py to facilitate understanding
 
 jackieL -- 2019-10-29 08:38
 Added comments to HTML pages to facilitate understanding
+
+elizabethD -- 2019-10-29 08:40
+Added comments to database files to facilitate understanding

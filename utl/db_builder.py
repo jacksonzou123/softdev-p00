@@ -5,8 +5,10 @@
 
 import sqlite3   #enable control of an sqlite database
 
+#opens or creates database file
 DB_FILE="blog.db"
 
+#commits the changes after a command
 def exec(cmd):
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
@@ -15,7 +17,7 @@ def exec(cmd):
     return output
 
 #==========================================================
-
+#creates tables if they do not exist with necessary columns
 def build_db():
     command = "CREATE TABLE IF NOT EXISTS user_tbl (user_id INT, username TEXT, password TEXT)"
     exec(command)    # run SQL statement
