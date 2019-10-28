@@ -17,9 +17,9 @@
       <!-- display error messages -->
       {% set msgs = get_flashed_messages(with_categories=true) %}
       {% for category, msg in msgs %}
-        <p style="color: {{ category }};">
-          {{ msg }}
-        </p>
+      <p>
+        <font color="{{category}}"> {{ msg }} </font>
+      </p>
       {% endfor %}
 
     </center>

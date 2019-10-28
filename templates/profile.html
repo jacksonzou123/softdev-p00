@@ -6,7 +6,7 @@
 <h1>{{ owner }}'s Profile </h1>
 
 <!-- displays all blogs made by owner on profile -->
-<b>Blogs: </b><br>
+<b>List of Blogs: </b><br>
 {% for title, id in blogs %}
   <a href="/blog?id={{ id }}"> {{ title }}</a><br>
 {% endfor %}

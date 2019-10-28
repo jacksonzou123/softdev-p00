@@ -10,4 +10,13 @@
         Edit posts using the edit button on each post. <br><br>
     <b>Search:</b><br>
         Search by keywords in blog titles. Leave blank to display all blogs on website.
+
+<br><br><br><hr width="50%">
+<div width="30%">
+  <br><u>List of All Registered Users:</u><br>
+  {% for username, id in users %}
+    <a href="/user?id={{id}}">{{ username }}</a><br>
+  {% endfor %}<br>
+</div>
+
 {% endblock %}

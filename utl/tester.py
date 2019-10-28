@@ -73,6 +73,12 @@ def getUserInfo(user_id):
     data = exec(q).fetchone()
     return data
 
+#returns a tuple of all blogs in blog_tbl
+def getAllUsers():
+    q = "SELECT username, user_id FROM user_tbl"
+    data = exec(q).fetchall()
+    return data
+
 #==========================user tests===========================
 
 #addUser("Elizabeth","wow")
@@ -204,6 +210,7 @@ def editEntry(entry_id, title, content):
     exec(q)
     return True
 
+#takes in entry_id, deletes them from entry_tbl
 def deleteEntry(entry_id):
     entry_id = int(entry_id)
     q = "DELETE FROM entry_tbl WHERE entry_id = %d" % entry_id

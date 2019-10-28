@@ -102,7 +102,8 @@ def about():
       flash('You must log in to access this page!', 'red')
       return redirect(url_for('login'))
     username = tester.getUserInfo(session['userid'])[0]
-    return render_template('about.html', username=username)
+    users = tester.getAllUsers()
+    return render_template('about.html', username=username, users=users)
 
 #search page with search bar
 @app.route("/search")

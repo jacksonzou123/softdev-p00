@@ -145,4 +145,7 @@ elizabethD -- 2019-10-29 08:40
 Added comments to database files to facilitate understanding
 
 jackieL -- 2019-10-29 11:50
-Added Flask code and database function to delete entry from blog 
+Added Flask code and database function to delete entry from blog
+
+jackieL -- 2019-10-29 14:00
+Displayed list of all users on about page, reformatted some pages
