@@ -2,13 +2,17 @@
 
 {% block content %}
 
-<!-- <a href="/createblog">Create Blog</a> -->
+<!-- displays info about owner -->
 <h1>{{ owner }}'s Profile </h1>
+
+<!-- displays all blogs made by owner on profile -->
 <b>Blogs: </b><br>
 {% for title, id in blogs %}
   <a href="/blog?id={{ id }}"> {{ title }}</a><br>
 {% endfor %}
 <br>
+
+<!-- if logged in user matches owner of profile, allow option to create blog -->
 {% if isOwner %}
 <form>
   <button type="submit" formaction="/createblog">Create Blog</button>

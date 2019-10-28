@@ -1,11 +1,13 @@
 {% extends "base_profile.html" %}
 
 {% block content %}
+<!-- info about the blog -->
 <div style="font-size:20px;">
   <b>Blog Title: </b>{{ title }}<br>
   <b>By: </b><a href="{{ userlink }}">{{ username }}</a><br><br>
 </div><br>
 
+<!-- display all entries in blog -->
 {% for title, content, id in entries %}
   <div style="width:50%; background-color:rgba(220, 220, 220, 0.55); padding:15px;">
     <b>{{ title }}</b>
@@ -17,6 +19,7 @@
   </div><br>
 {% endfor %}
 
+<!-- if logged in user owns the blog, allow them to create entry -->
 {% if isOwner %}
 <form>
   <button type="submit" formaction="/editentry">Create Entry</button>

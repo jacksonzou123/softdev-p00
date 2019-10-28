@@ -1,6 +1,7 @@
 {% extends "base_profile.html" %}
 {% block content %}
 
+<!-- search bar -->
 <form action="/query" method="POST">
     Search: <input type="text" name="keyword">
     <input type="submit" value="Submit">
@@ -8,12 +9,12 @@
 <i style="font-size:11px;">To display all blogs on the website, leave search bar blank and click submit. </i><br>
 <br>
 
+<!-- display all entries that match search keyword -->
 {% for id, title, owner_id, owner in results %}
 <div style="width:30%; background-color:rgba(220, 220, 220, 0.55); padding:15px;">
   Blog Title: <b><a href="/blog?id={{id}}">{{ title}}</a></b><br>
   Created By: <a href="/user?id={{owner_id}}">{{ owner }}</a>
 </div><br>
-
 {% endfor %}
 
 {% endblock %}

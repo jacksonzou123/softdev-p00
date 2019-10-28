@@ -135,5 +135,8 @@ Final changes with error handling for faulty URLs
 emilyZ -- 2019-10-28 00:53
 Final change - handling extra spaces before and after search.
 
-jaclieL -- 2019-10-29 08:32
+jackieL -- 2019-10-29 08:32
 Added comments to app.py to facilitate understanding
+
+jackieL -- 2019-10-29 08:38
+Added comments to HTML pages to facilitate understanding
