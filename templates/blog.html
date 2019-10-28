@@ -11,11 +11,15 @@
 {% for title, content, id in entries %}
   <div style="width:50%; background-color:rgba(220, 220, 220, 0.55); padding:15px;">
     <b>{{ title }}</b>
-    {% if isOwner %}
-    <a href="/editentry?id={{id}}"><button type="submit">Edit</button></a>
-    {% endif %}
     <br>
     {{ content }}
+    <br>
+    <!-- owner of entry allowed to edit and delete entry -->
+    {% if isOwner %}
+    <br>
+    <a href="/editentry?id={{id}}"><button type="submit" style="border:none; background-color:white; width:50px; margin-right:10px;">Edit</button></a>
+    <a href="/deleteentry?id={{id}}"><button type="submit" style="color:white; background-color:red; border:none;">Delete</button></a>
+    {% endif %}
   </div><br>
 {% endfor %}
 

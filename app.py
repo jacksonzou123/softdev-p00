@@ -226,10 +226,22 @@ def updateentry():
             return redirect(url_for('editentry'))
     return redirect(url_for('blog', id=id))
 
+@app.route('/deleteentry')
+def deleteentry():
+    if ("userid" not in session):
+        flash('You must log in to access this page!', 'red')
+        return redirect(url_for('login'))
+    id = session['blogid']
+    if (request.args):
+        if ('id' in request.args):
+            entry_id = request.args['id']
+            tester.deleteEntry(entry_id)
+    return redirect(url_for('blog', id=id))
+
 #logout page
 @app.route("/logout")
 def logout():
-    session.clear() #clear info stored in session 
+    session.clear() #clear info stored in session
     flash('You have been successfully logged out.', 'green')
     return redirect(url_for('root'))
 

@@ -204,6 +204,10 @@ def editEntry(entry_id, title, content):
     exec(q)
     return True
 
+def deleteEntry(entry_id):
+    entry_id = int(entry_id)
+    q = "DELETE FROM entry_tbl WHERE entry_id = %d" % entry_id
+    data = exec(q)
 
 #==========================entry get methods===========================
 
