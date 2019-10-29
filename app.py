@@ -21,11 +21,15 @@ def root():
 #welcome page with sign-in options
 @app.route("/welcome")
 def sign():
+    if ("userid" in session): #if signed in, go to profile
+        return redirect(url_for('profile'))
     return render_template('welcome.html')
 
 #register for an account
 @app.route("/register")
 def register():
+    if ("userid" in session): #if signed in, go to profile
+        return redirect(url_for('profile'))
     return render_template('register.html')
 
 #process register form
@@ -56,6 +60,8 @@ def adduser():
 #log in to account
 @app.route("/login")
 def login():
+    if ("userid" in session): #if signed in, go to profile
+        return redirect(url_for('profile'))
     return render_template('login.html')
 
 #process login form

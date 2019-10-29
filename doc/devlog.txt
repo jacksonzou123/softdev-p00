@@ -169,4 +169,7 @@ jackieL -- 2019-10-29 21:45
 Fixed error in displaying username in navbar
 
 jackieL -- 2019-10-29 21:52
-Fixed error in adding title with whitespace 
+Fixed error in adding title with whitespace
+
+jackieL -- 2019-10-29 22:39
+Fixed problem with user being logged out when they redirected to certain routes 
