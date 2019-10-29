@@ -109,6 +109,7 @@ def addBlogHelper(user_id, title, data):
 
 #takes in user_id/title, generates blog_id, adds them to blog_tbl, returns blog_id
 def addBlog(user_id, title):
+    title = title.strip()
     user_id = int(user_id)
     q = "SELECT * FROM blog_tbl WHERE user_id = %d AND title = '%s'" % (user_id, title)
     data = exec(q).fetchone()
@@ -189,9 +190,11 @@ def addEntryHelper(blog_id, title, content, data):
 
 #takes in blog_id/title/content, generates entry_id, adds them to entry_tbl, returns entry_id
 def addEntry(blog_id, title, content):
+    title = title.strip()
     blog_id = int(blog_id)
     q = "SELECT * FROM entry_tbl WHERE blog_id = %d AND title='%s'" % (blog_id, title)
     data = exec(q).fetchone()
+    print(data)
     if (data is not None):
         return None
     q = "SELECT blog_id FROM blog_tbl"
