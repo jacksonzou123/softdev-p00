@@ -152,3 +152,6 @@ Displayed list of all users on about page, reformatted some pages
 
 emilyZ -- 2019-10-29 14:54
 Update site map on new user display and delete entry
+
+jackieL -- 2019-10-29 20:39
+Added in new textError function to account for single quote errors 
