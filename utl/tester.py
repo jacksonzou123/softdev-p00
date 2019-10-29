@@ -199,10 +199,13 @@ def addEntry(blog_id, title, content):
     return addEntryHelper(blog_id, title, content, data)
 
 #takes in entry_id/title/content, adds them to entry_tbl for that entry
-def editEntry(entry_id, title, content):
+def editEntry(entry_id, blog_id, title, content):
+    title = title.strip()
     entry_id = int(entry_id)
-    q = "SELECT * FROM entry_tbl WHERE title='%s' AND entry_id != %d" % (title, entry_id)
+    blog_id = int(blog_id)
+    q = "SELECT * FROM entry_tbl WHERE entry_id != %d AND title='%s' AND blog_id = %d" % (entry_id, title, blog_id)
     data = exec(q).fetchall()
+    print(data)
     #print(len(data))
     if (len(data) > 0):
         return False

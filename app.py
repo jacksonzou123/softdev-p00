@@ -225,7 +225,7 @@ def updateentry():
             if (title == '' or content == ''): #if empty submission
                 flash('Fields cannot be empty', 'red')
                 return redirect(url_for('editentry', id=entry_id))
-            entry = tester.editEntry(entry_id, title, content) #edit entry, returns False if name is already being used
+            entry = tester.editEntry(entry_id, id, title, content) #edit entry, returns False if name is already being used
             if (not entry):
                 flash("Title is already being used for another post", 'red')
                 return redirect(url_for('editentry', id=entry_id))
