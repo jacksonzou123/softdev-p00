@@ -161,3 +161,6 @@ Modified textError function to account for double quote errors
 
 jackieL -- 2019-10-29 21:16
 Modified code to not allow for the same entry title in the same blog, accounting for whitespace
+
+jackieL -- 2019-10-29 21:30
+Fixed error with returning blogs by different users with the same title

@@ -269,7 +269,7 @@ def getBlogfromEntry(entry_id):
 
 #returns a tuple of all blogs in blog_tbl
 def getAllBlogs():
-    q = "SELECT title FROM blog_tbl"
+    q = "SELECT title, blog_id FROM blog_tbl"
     data = exec(q).fetchall()
     return data
 
@@ -280,16 +280,17 @@ def findBlog(search):
     data = getAllBlogs()
     blogsList = []
     #creates a list of blogs with acceptable titles
-    for blogT in data:
-        title = str(blogT[0])
+    for blogT, blogID in data:
+        title = str(blogT)
+        #print(title)
         titleSmall = title.lower().strip()
         if search in titleSmall:
-            blogsList.append(title)
+            blogsList.append(blogID)
             #print(blogsList)
     blogIDList = []
     #creates a list of tuples containing blog_id, title, user_id, and username
-    for goodTitles in blogsList:
-        q = "SELECT blog_id, title, user_id FROM blog_tbl WHERE title='%s'" % goodTitles
+    for id in blogsList:
+        q = "SELECT blog_id, title, user_id FROM blog_tbl WHERE blog_id=%d" % id
         data = exec(q).fetchone()
         data = data + getUserInfo(getUserfromBlog(str(data[0])))
         blogIDList.append(data)
