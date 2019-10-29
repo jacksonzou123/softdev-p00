@@ -154,4 +154,7 @@ emilyZ -- 2019-10-29 14:54
 Update site map on new user display and delete entry
 
 jackieL -- 2019-10-29 20:39
-Added in new textError function to account for single quote errors 
+Added in new textError function to account for single quote errors
+
+jackieL -- 2019-10-29 21-01
+Modified textError function to account for double quote errors 

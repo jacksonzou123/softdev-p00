@@ -37,8 +37,8 @@ def adduser():
     if (username == '' or password == ''):
         flash('Fields cannot be left empty', 'red')
         return redirect(url_for('register'))
-    if (textError(username)):
-        flash('Please enter a username without single quotes!', 'red')
+    if (textError(username) or textError(password)):
+        flash('Please input values without quotes!', 'red')
         return redirect(url_for('register'))
     #print(request.method)
     #print(username)
@@ -149,7 +149,7 @@ def updateblog():
       return redirect(url_for('login'))
     title = request.form['title']
     if (textError(title)):
-        flash("Please enter a title without single quotes!", 'red')
+        flash("Please enter a title without quotes!", 'red')
         return redirect(url_for('createblog'))
     if (title == ''): #if no title entered
         flash('Fields cannot be empty', 'red')
@@ -219,8 +219,8 @@ def updateentry():
     if (request.args): #if query string exists (editing an entry)
         if ('id' in request.args): #if id query exists
             entry_id = request.args['id']
-            if (textError(title) or textError(content)): #if single quotes found
-                flash("Please input values without single quotes!", 'red')
+            if (textError(title) or textError(content)): #if quotes found
+                flash("Please input values without quotes!", 'red')
                 return redirect(url_for('editentry', id=entry_id))
             if (title == '' or content == ''): #if empty submission
                 flash('Fields cannot be empty', 'red')
@@ -230,8 +230,8 @@ def updateentry():
                 flash("Title is already being used for another post", 'red')
                 return redirect(url_for('editentry', id=entry_id))
     else: #if creating a new entry
-        if (textError(title) or textError(content)): #if single quotes found
-            flash("Please input values without single quotes!", 'red')
+        if (textError(title) or textError(content)): #if quotes found
+            flash("Please input values without quotes!", 'red')
             return redirect(url_for('editentry'))
         if (title == '' or content == ''): #if empty submission
             flash('Fields cannot be empty', 'red')
@@ -262,9 +262,11 @@ def logout():
     return redirect(url_for('root'))
 
 def textError(string):
-    if ("'" in string):
+    if ("'" in string or "\"" in string):
         return True
     return False
+
+
 
 if __name__ == "__main__":
     db_builder.build_db()
