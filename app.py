@@ -81,18 +81,19 @@ def profile():
     if ("userid" not in session):
       flash('You must log in to access this page!', 'red')
       return redirect(url_for('login'))
+    username = tester.getUserInfo(session['userid'])[0]
     #print(request.args['id'])
     if (request.args): #if url has query string
         if ('id' in request.args): #if url has id
             id = request.args['id']
             name = tester.getUserInfo(id) #get username from id query
             if (name): #if id is valid user id
-                username = name[0] #retrieve username from tuple
+                name = name[0] #retrieve username from tuple
                 isOwner = False #checks if logged in user "owns" the profile
                 if (id == session['userid']): #if logged in user matches owner of blog
                     isOwner = True
                 blogs = tester.getUserBlogs(id) #get all blogs based on id query
-                return render_template('profile.html', username=username, owner=username, isOwner=isOwner, blogs=blogs) #success!
+                return render_template('profile.html', username=username, owner=name, isOwner=isOwner, blogs=blogs) #success!
             flash('No profile was found for the given url. You have been redirected back to your own profile.', 'red') #if id is not valid user_id
         else:
             flash('No profile was found for the given url. You have been redirected back to your own profile.', 'red') #if url does not have id query
@@ -175,12 +176,13 @@ def blog():
                 session['blogid'] = id #store current blog that is being visited in session, useful for knowing where to add entries later without using queries
                 isOwner = False #default value
                 user_id = tester.getUserfromBlog(id)[0] #get user_id associated with blog_id
-                username = tester.getUserInfo(user_id)[0] #get username from user_id
+                ownername = tester.getUserInfo(user_id)[0] #get username from user_id
                 if (int(user_id) == int(session['userid'])): #if owner of blog matches logged in user
                     isOwner = True
                 userlink = "/user?id=%s" % user_id #click link to access user profile from blog
                 entries = tester.getAllEntries(id) #get all entries from blog based on blog_id
-                return render_template('blog.html', username=username, isOwner=isOwner, title=name, userlink=userlink, entries=entries)
+                username = tester.getUserInfo(session['userid'])[0]
+                return render_template('blog.html', username=username, ownername=ownername, isOwner=isOwner, title=name, userlink=userlink, entries=entries)
             else: #blog_id given in query is not valid
                 flash('No blog was found for the given URL. You have been redirected back to your own profile.', 'red')
         else: #no id query found

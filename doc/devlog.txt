@@ -164,3 +164,6 @@ Modified code to not allow for the same entry title in the same blog, accounting
 
 jackieL -- 2019-10-29 21:30
 Fixed error with returning blogs by different users with the same title
+
+jackieL -- 2019-10:29 21:45
+Fixed error in displaying username in navbar
