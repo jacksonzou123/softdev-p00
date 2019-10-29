@@ -104,7 +104,7 @@ def addBlogHelper(user_id, title, data):
     command = "INSERT INTO blog_tbl VALUES(%s, %s, '%s')" % (rand, user_id, title)
     #print(command)
     exec(command)
-    return rand;
+    return rand
 
 
 #takes in user_id/title, generates blog_id, adds them to blog_tbl, returns blog_id
@@ -196,7 +196,7 @@ def addEntry(blog_id, title, content):
         return None
     q = "SELECT blog_id FROM blog_tbl"
     data = exec(q).fetchall()
-    return addEntryHelper(blog_id, title, content, data);
+    return addEntryHelper(blog_id, title, content, data)
 
 #takes in entry_id/title/content, adds them to entry_tbl for that entry
 def editEntry(entry_id, title, content):
