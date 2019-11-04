@@ -4,7 +4,7 @@
   <head>
     <link rel="stylesheet"
     type="text/css"
-    href="../static/css/style.css"> 
+    href="../static/css/style.css">
     {% block head %}
     <title>{{title}}</title>
     {% endblock %}
@@ -15,14 +15,15 @@
       {% block navbar %}
       <div class="topnav">
         <b>Hello, {{ username }}!</b>
-        <table>
+        <br>
           <tr>
-            <td><a href="/user"> My Profile </a>|</td>
-            <td><a href="/search"> Search </a>|</td>
-            <td><a href="/about"> About </a>|</td>
+            <td><a href="/user"> My Profile </a> | </td>
+            <td><a href="/search"> Search </a> | </td>
+            <td><a href="/about"> About </a> | </td>
             <td><a href="/logout"> Log out</a></td>
+            <br>
           </tr>
-        </table>
+          <br>
       </div><hr>
       {% endblock %}
 

@@ -5,7 +5,7 @@ SoftDev1 pd9
 */
 
 .topnav{
-  background-color: #808080;
+  background-color: #EEEEEE;
   text-align: center;
   font-size: 20px;
   padding: 8px;
@@ -16,6 +16,12 @@ SoftDev1 pd9
 .intro {
   font-size: 20px;
   color:blue;
+}
+
+.bloglist {
+  font-size: 30px;
+  color: #808080;
+  text-align: center;
 }
 
 .register {
@@ -40,12 +46,12 @@ SoftDev1 pd9
 }
 
 .submit{
-  background-color: #583910;
-  color: #29D932;
-  font-size: 40px;
-  padding: 50px 33px;
-  border-radius: 4px;
-  border: 10px solid green;
+  background-color: #D9D9F3;
+  color: #60AFFE;
+  font-size: 20px;
+  padding: 25px 15px;
+  border-radius: 1px;
+  border: 10px solid #60AFFE;
 }
 
 .editentry{
@@ -68,39 +74,37 @@ h1 {
 
 h2 {
   color: black;
-  font-size: 20px;
-  font-family: georgia;
+  font-size: 25px;
+  font-family: "Proza Libre";
 }
 
 form {
-  font-family: georgia;
+  font-family: "Proza Libre";
+  font-size: 20px;
   color: blue;
 }
 
 table{
   width: 50%;
-  background-color: #EEEEEE;
   border-spacing: 10px;
+  text-align: center
 }
 
 input {
-  border-width: 3px;
+  border-width: 1px;
   padding: 5px;
   font-size: 15px;
   border-color: black;
-  background-color: #808080;
-  font-weight: 900;
 }
 
 b {
   font-size: 15px;
   border-color: orange;
-  background-color: #808080;
   font-weight: 9000;
 }
 
 p {
-  font-size: 25px;
+  font-size: 35px;
   border-color: orange;
   font-weight: 9000;
   color: #b7cda6;

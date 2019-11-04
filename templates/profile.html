@@ -6,10 +6,12 @@
 <h1>{{ owner }}'s Profile </h1>
 
 <!-- displays all blogs made by owner on profile -->
-<b>List of Blogs: </b><br>
+<p>List of Blogs: </p>
+<div class="bloglist">
 {% for title, id in blogs %}
   <a href="/blog?id={{ id }}"> {{ title }}</a><br>
 {% endfor %}
+</div>
 <br>
 
 <!-- if logged in user matches owner of profile, allow option to create blog -->
